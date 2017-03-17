@@ -6,7 +6,7 @@
 #    By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 20:16:27 by sbelazou          #+#    #+#              #
-#    Updated: 2017/03/17 10:58:28 by sbelazou         ###   ########.fr        #
+#    Updated: 2017/03/17 12:04:54 by sbelazou         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -38,7 +38,7 @@ ECHO		=	echo
 
 $(NAME)	:		$(OBJ)
 				make -C includes/libft/
-				-@$(CC) $(INC_LIB) $(CFLAGS) -o $(NAME) $(OBJS)
+				-@$(CC) -lncurses $(INC_LIB) $(CFLAGS) -o $(NAME) $(OBJS)
 				@$(ECHO) "\033[32mAll sources are compiled. "
 				@$(ECHO) "$(NAME) has been created.\033[0m"
 
