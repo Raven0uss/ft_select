@@ -39,7 +39,22 @@ Il existe une autre façon de faire, plus simple, qui ne nécessite pas de conna
 la position du curseur : on utilise « nd » avec tgetstr.
 */
 
-static int			display()
+int	outc(int c)
+{
+  write(1, &c, 1);
+  return (0);
+}
+
+static void			arrows(char *str, t_data *curs)
+{
+  char				*res;
+
+  res = tgetstr("cm", &str);
+  ft_putstr("Test");
+  tputs(tgoto(res, curs->x, curs->y), 1, outc);
+}
+
+static int			display(t_data *curs)
 {
 	char			buff[3];
 	unsigned int	flag;
@@ -49,7 +64,7 @@ static int			display()
 	{
 		read(0, buff, 3);
 		if (buff[0] == 27) // Case 0 == c'est une fleche
-			ft_putendl("It's an arrow input.");
+			arrows(buff, curs);
 		else if (buff[0] == 4) //Ctrl + D
 			flag--;
 	}
@@ -60,8 +75,13 @@ static int			display()
 int					main(int ac, char **av, char **envp)
 {
 	char			*name;
+	t_data			*curs;
 	struct termios	term;
 
+	if (!(curs = malloc(sizeof(t_data))))
+	  return (-2);
+	curs->x = 0;
+	curs->y = 0;
 	ft_putendl("Loading termcaps...");
 	if (!(name = getenv("TERM")))
 	{
@@ -93,6 +113,6 @@ int					main(int ac, char **av, char **envp)
 		return (-1);
 	}
 	ft_putendl("Termcaps init is OK.");
-	display();
+	display(curs);
 	return (0);
 }

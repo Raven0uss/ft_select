@@ -18,6 +18,11 @@
 # include <termios.h>
 # include "libft/libft.h"
 
+typedef struct	s_data
+{
+  unsigned int	x;
+  unsigned int	y;
+}		t_data;
 /*struct termios {
 	tcflag_t c_iflag;
 	tcflag_t c_oflag;
