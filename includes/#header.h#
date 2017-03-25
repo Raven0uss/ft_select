@@ -16,7 +16,7 @@
 # include <curses.h>
 # include <term.h>
 # include <termios.h>
-# include <sys/ioctl.h>
+#  <sys/ioctl.h>
 # include "libft/libft.h"
 
 typedef struct	s_data

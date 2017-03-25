@@ -1,0 +1,1 @@
+make re -C ../includes/libft/ && gcc -g -o ft_select_lnx *.c  ../includes/libft/libft.a -lncurses
