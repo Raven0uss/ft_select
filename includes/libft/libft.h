@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:29:38 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/03/17 11:53:06 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/03/26 11:54:38 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@
 
 typedef struct			s_list
 {
-	void				*content;
-	size_t				content_size;
+	char				*content;
 	struct s_list		*next;
 	struct s_list		*prev;
 }						t_list;
@@ -85,13 +84,12 @@ void					ft_putchar_fd(char c, int fd);
 void					ft_putstr_fd(char const *s, int fd);
 void					ft_putendl_fd(char const *s, int fd);
 void					ft_putnbr_fd(int n, int fd);
-t_list					*ft_lstnew(void const *content, size_t content_size);
+t_list					*ft_lstnew(char const *content);
 void					ft_lstdelone(t_list **alst,
-										void (*del)(void *, size_t));
-void					ft_lstdel(t_list **alst, void (*del)(void *, size_t));
-void					ft_lstadd(t_list **alst, t_list *new);
+										void (*del)(char *));
+void					ft_lstdel(t_list **alst, void (*del)(char *));
+void					ft_lstadd(t_list **alst, t_list *new, int m);
 void					ft_lstiter(t_list *lst, void (*f)(t_list *elem));
-t_list					*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void					ft_swap(int *a, int *b);
 int						ft_sqrt(int nb);
 int						ft_pow(int nb, int pow);
@@ -108,3 +106,5 @@ size_t					ft_intlen(int nb);
 char					**ft_whitespaces(char const *s);
 
 #endif
+
+

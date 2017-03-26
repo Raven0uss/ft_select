@@ -6,7 +6,7 @@
 #    By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 20:16:27 by sbelazou          #+#    #+#              #
-#    Updated: 2017/03/17 12:04:54 by sbelazou         ###   ########.fr        #
+#    Updated: 2017/03/26 15:18:40 by sbelazou         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,7 +14,7 @@ NAME		=	ft_select
 DIRSRC		=	./srcs/
 DIROBJ		=	./objs/
 INC_LIB		=	./includes/libft/libft.a
-SRC			=	main.c
+SRC			=	main.c sigft.c lst_functions.c ft_select.c key_event.c
 
 OBJ			=	$(SRC:.c=.o)
 OBJS		=	$(OBJ:%=$(DIROBJ)%)
