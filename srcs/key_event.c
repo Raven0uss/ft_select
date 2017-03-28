@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 15:13:19 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/03/26 15:39:35 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/03/27 12:38:13 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ t_list				*event_key_arrow(char *buff, t_winsize *ws,
 			elem = right(ws, lst, elem);
 		else if (key == 68)
 			elem = left(ws, lst, elem);
+		else if (key == 51)
+			ft_putendl("Delete");
 		else
-			return (NULL);
+			return (elem);
 		return (elem);
 	}
 	return (NULL);

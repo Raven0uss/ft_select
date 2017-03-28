@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   select_loop.c                                      :+:      :+:    :+:   */
+/*   ft_select.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 12:48:17 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/03/26 15:43:32 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/03/27 12:37:31 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void		ft_select(t_list **lst, struct termios *term, t_winsize *ws)
 		if ((int)buff[0] == 27)
 			if (event_key_arrow(buff, ws, lst, elem) == NULL)
 				break ;
+		if ((int)buff[0] == 127)
+			ft_putendl("BackSpace");
 	}
 	free(buff);
 }
