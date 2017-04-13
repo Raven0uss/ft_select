@@ -6,13 +6,13 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 19:01:42 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/13 20:00:14 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/13 20:18:55 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-static t_list				*uon_line(int mode, t_list *elem, t_winsize *ws)
+static t_list				*uon_line(int mode, t_list *elem, t_data *ws)
 {
 	if (mode)
 	{
@@ -30,7 +30,7 @@ static t_list				*uon_line(int mode, t_list *elem, t_winsize *ws)
 	return (elem);
 }
 
-t_list	*evkey_select(char *buff, t_winsize *ws, t_list **lst, t_list *elem)
+t_list	*evkey_select(char *buff, t_data *ws, t_list **lst, t_list *elem)
 {
 	if ((int)buff[1] == 0)
 	{

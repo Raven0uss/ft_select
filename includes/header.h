@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 20:16:53 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/12 19:25:21 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/13 20:18:36 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@
 # include <sys/ioctl.h>
 # include "libft/libft.h"
 
-typedef struct	s_winsize
+typedef struct	s_data
 {
 	int			x;
 	int			y;
 	int			cx;
 	int			cy;
-}				t_winsize;
+}				t_data;
 
 void			sigft();
 t_list			*lst_creator(char **av, int ac);
 void			ft_aff_lst(t_list *lst);
-void			ft_select(t_list **lst, struct termios *term, t_winsize *ws);
-t_list			*evkey_arrow(char *buff, t_winsize *ws,
+void			ft_select(t_list **lst, struct termios *term, t_data *ws);
+t_list			*evkey_arrow(char *buff, t_data *ws,
 								t_list **lst, t_list *elem);
-t_list			*evkey_select(char *buff, t_winsize *ws,
+t_list			*evkey_select(char *buff, t_data *ws,
 								  t_list **lst, t_list *elem);
 int				tc_out(int c);
 

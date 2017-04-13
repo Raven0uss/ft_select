@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 10:57:31 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/13 17:56:26 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/13 20:21:16 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void			tc_end(struct termios *term)
 	tputs(tgetstr("ve", NULL), 1, tc_out);
 }
 
-int					ws_init(t_winsize *wsize, unsigned int n)
+int					ws_init(t_data *wsize, unsigned int n)
 {
 	struct winsize	w;
 
@@ -61,7 +61,7 @@ static int			tc_init(struct termios *term)
 int					main(int ac, char **av)
 {
 	struct termios	term;
-	t_winsize		wsize;
+	t_data		wsize;
 	t_list			*lst;
 
 	if (ac == 1)

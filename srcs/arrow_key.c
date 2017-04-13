@@ -6,13 +6,13 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 15:13:19 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/13 20:09:25 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/13 20:54:21 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-static t_list	*right(t_winsize *ws, t_list **lst, t_list *elem)
+static t_list	*right(t_data *ws, t_list **lst, t_list *elem)
 {
 	if (ws->cx != ws->x)
 	{
@@ -22,7 +22,7 @@ static t_list	*right(t_winsize *ws, t_list **lst, t_list *elem)
 	return (elem);
 }
 
-static t_list	*left(t_winsize *ws, t_list **lst, t_list *elem)
+static t_list	*left(t_data *ws, t_list **lst, t_list *elem)
 {
 	if (ws->cx != 0)
 	{
@@ -32,7 +32,7 @@ static t_list	*left(t_winsize *ws, t_list **lst, t_list *elem)
 	return (elem);
 }
 
-static t_list	*down(t_winsize *ws, t_list **lst, t_list *elem)
+static t_list	*down(t_data *ws, t_list **lst, t_list *elem)
 {
 	if (ws->cy != ws->y)
 	{
@@ -47,7 +47,7 @@ static t_list	*down(t_winsize *ws, t_list **lst, t_list *elem)
 	return (elem);
 }
 
-static t_list	*up(t_winsize *ws, t_list **lst, t_list *elem)
+static t_list	*up(t_data *ws, t_list **lst, t_list *elem)
 {
 	if (ws->cy != 0)
 	{
@@ -62,7 +62,7 @@ static t_list	*up(t_winsize *ws, t_list **lst, t_list *elem)
 	return (elem);
 }
 
-t_list				*evkey_arrow(char *buff, t_winsize *ws,
+t_list				*evkey_arrow(char *buff, t_data *ws,
 								t_list **lst, t_list *elem)
 {
 	int	key;
