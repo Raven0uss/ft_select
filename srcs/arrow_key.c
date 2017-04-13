@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 15:13:19 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/03/27 12:38:13 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/13 20:09:25 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,55 @@
 
 static t_list	*right(t_winsize *ws, t_list **lst, t_list *elem)
 {
-	ft_putendl(">");
+	if (ws->cx != ws->x)
+	{
+		ws->cx++;
+		tputs(tgoto(tgetstr("cm", NULL), ws->cx, ws->cy), 1, tc_out);
+	}
 	return (elem);
 }
 
 static t_list	*left(t_winsize *ws, t_list **lst, t_list *elem)
 {
-	ft_putendl("<");
+	if (ws->cx != 0)
+	{
+		ws->cx--;
+		tputs(tgoto(tgetstr("cm", NULL), ws->cx, ws->cy), 1, tc_out);
+	}
 	return (elem);
 }
 
 static t_list	*down(t_winsize *ws, t_list **lst, t_list *elem)
 {
-	ft_putendl("v");
+	if (ws->cy != ws->y)
+	{
+		elem = elem->next;
+		ws->cy++;
+	}
+	/*else
+	{
+		ws->cy = 0;
+		}*/
+	tputs(tgoto(tgetstr("cm", NULL), ws->cx, ws->cy), 1, tc_out);
 	return (elem);
 }
 
 static t_list	*up(t_winsize *ws, t_list **lst, t_list *elem)
 {
-	ft_putendl("^");
+	if (ws->cy != 0)
+	{
+		elem = elem->prev;
+		ws->cy--;
+	}
+	/*else
+	{
+		ws->cy = ws->y;
+		}*/
+	tputs(tgoto(tgetstr("cm", NULL), ws->cx, ws->cy), 1, tc_out);
 	return (elem);
 }
 
-t_list				*event_key_arrow(char *buff, t_winsize *ws,
+t_list				*evkey_arrow(char *buff, t_winsize *ws,
 								t_list **lst, t_list *elem)
 {
 	int	key;
@@ -51,12 +77,12 @@ t_list				*event_key_arrow(char *buff, t_winsize *ws,
 			elem = up(ws, lst, elem);
 		else if (key == 66)
 			elem = down(ws, lst, elem);
-		else if (key == 67)
+		/*else if (key == 67)
 			elem = right(ws, lst, elem);
 		else if (key == 68)
-			elem = left(ws, lst, elem);
+		elem = left(ws, lst, elem);*/
 		else if (key == 51)
-			ft_putendl("Delete");
+			;//ft_putendl("Delete");
 		else
 			return (elem);
 		return (elem);

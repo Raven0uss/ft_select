@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 12:48:17 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/03/27 12:37:31 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/13 19:22:38 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ void		aff_tc(char *buff)
 	ft_putchar('\n');
 }
 
+static void	init_select(t_list *elem, struct termios *term, t_winsize *ws)
+{
+	tputs(tgetstr("cl", NULL), 1, tc_out);
+	//tputs(tgetstr("vi", NULL), 1, tc_out);
+	tputs(tgetstr("ms", NULL), 1, tc_out);
+	ft_aff_lst(elem);
+	//tputs(tgetstr("ue", NULL), 1, tc_out);
+	tputs(tgetstr("ho", NULL), 1, tc_out);
+}
+
 void		ft_select(t_list **lst, struct termios *term, t_winsize *ws)
 {
 	t_list	*elem;
@@ -29,16 +39,31 @@ void		ft_select(t_list **lst, struct termios *term, t_winsize *ws)
 
 	buff = ft_strnew(3);
 	elem = *lst;
+	init_select(elem, term, ws);
 	while ((int)buff[0] != 10 && (int)buff[0] != 4)
 	{
 		ft_bzero((void *)buff, sizeof(buff));
 		read(0, buff, 3);
-		aff_tc(buff);
+		//aff_tc(buff);
 		if ((int)buff[0] == 27)
-			if (event_key_arrow(buff, ws, lst, elem) == NULL)
+			if ((elem = evkey_arrow(buff, ws, lst, elem)) == NULL)
 				break ;
-		if ((int)buff[0] == 127)
-			ft_putendl("BackSpace");
+		if ((int)buff[0] == 32) //Space
+			if ((elem = evkey_select(buff, ws, lst, elem)) == NULL)
+				break ;
+		if ((int)buff[0] == 127) //Backspace
+			;//if (evkey_delete(buff, ws, lst, elem) == NULL)
+		// break;
 	}
 	free(buff);
 }
+
+
+
+
+
+
+
+
+
+

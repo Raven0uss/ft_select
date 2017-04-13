@@ -6,20 +6,20 @@
 #    By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 20:16:27 by sbelazou          #+#    #+#              #
-#    Updated: 2017/03/26 15:18:40 by sbelazou         ###   ########.fr        #
+#    Updated: 2017/04/12 12:04:17 by sbelazou         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME		=	ft_select
+
 DIRSRC		=	./srcs/
 DIROBJ		=	./objs/
+
 INC_LIB		=	./includes/libft/libft.a
-SRC			=	main.c sigft.c lst_functions.c ft_select.c key_event.c
+SRC			=	$(shell find $(DIRSRC)*.c -type f)
+OBJ			=	$(patsubst $(DIRSRC)%,$(DIROBJ)%,$(SRC:.c=.o))
 
-OBJ			=	$(SRC:.c=.o)
-OBJS		=	$(OBJ:%=$(DIROBJ)%)
 FLAGS		=
-
 ifdef FLAGS
 	ifeq ($(FLAGS), yes)
 CFLAGS		=	-Wall -Wextra -Werror
@@ -32,22 +32,21 @@ CFLAGS		=
 endif
 
 CC			=	/usr/bin/gcc
-RM			=	/bin/rm -f
+RM			=	/bin/rm -rf
 ECHO		=	echo
 
+all:			$(NAME)
 
-$(NAME)	:		$(OBJ)
-				make -C includes/libft/
-				-@$(CC) -lncurses $(INC_LIB) $(CFLAGS) -o $(NAME) $(OBJS)
+$(NAME):		$(OBJ)
+				-@make -C includes/libft/
+				-@$(CC) $(INC_LIB) $(CFLAGS) -o $@ $^ -lncurses
 				@$(ECHO) "\033[32mAll sources are compiled. "
 				@$(ECHO) "$(NAME) has been created.\033[0m"
 
 clean	:
 				-@make clean -C includes/libft/
-				@(cd $(DIROBJ) && $(RM) $(OBJ))
+				@($(RM) $(DIROBJ))
 				@$(ECHO) "\033[31mObjects of $(NAME) has been removed.\033[0m"
-
-all		:		$(NAME)
 
 fclean	:		clean
 				-@make fclean -C includes/libft/
@@ -65,7 +64,8 @@ git		:	zen fclean
 			git commit -am "Push with Makefile"
 			git push
 
-.PHONY	:		all clean fclean re
+.PHONY	:		all clean fclean re zen git
 
-%.o		:		$(DIRSRC)/%.c
-				$(CC) $(CFLAGS) -o $(DIROBJ)/$@ -c $<
+$(DIROBJ)%.o	:	$(DIRSRC)%.c
+					@mkdir -p $(dir $@)
+					$(CC) $(CFLAGS) -o $@ -c $<
