@@ -26,16 +26,20 @@ typedef struct	s_data
 	int			y;
 	int			cx;
 	int			cy;
+	struct termios		*term;
 }				t_data;
 
 void			sigft();
 t_list			*lst_creator(char **av, int ac);
 void			ft_aff_lst(t_list *lst);
-void			ft_select(t_list **lst, struct termios *term, t_data *ws);
+void			ft_select(t_list **lst, t_data *ws);
 t_list			*evkey_arrow(char *buff, t_data *ws,
 								t_list **lst, t_list *elem);
 t_list			*evkey_select(char *buff, t_data *ws,
 								  t_list **lst, t_list *elem);
 int				tc_out(int c);
+t_list			*ptrto_frst(t_list *elem);
+t_list			*ptrto_last(t_list *elem);
+t_list			*evkey_delete(t_data *ws, t_list **lst, t_list *elem);
 
 #endif

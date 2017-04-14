@@ -22,7 +22,7 @@ void		aff_tc(char *buff)
 	ft_putchar('\n');
 }
 
-static void	init_select(t_list *elem, struct termios *term, t_winsize *ws)
+void			init_select(t_list *elem, struct termios *term, t_data *ws)
 {
 	tputs(tgetstr("cl", NULL), 1, tc_out);
 	//tputs(tgetstr("vi", NULL), 1, tc_out);
@@ -32,7 +32,7 @@ static void	init_select(t_list *elem, struct termios *term, t_winsize *ws)
 	tputs(tgetstr("ho", NULL), 1, tc_out);
 }
 
-void		ft_select(t_list **lst, struct termios *term, t_winsize *ws)
+void		ft_select(t_list **lst, struct termios *term, t_data *ws)
 {
 	t_list	*elem;
 	char	*buff;
@@ -52,7 +52,7 @@ void		ft_select(t_list **lst, struct termios *term, t_winsize *ws)
 			if ((elem = evkey_select(buff, ws, lst, elem)) == NULL)
 				break ;
 		if ((int)buff[0] == 127) //Backspace
-			;//if (evkey_delete(buff, ws, lst, elem) == NULL)
+		  ;//if (evkey_delete(buff, ws, lst, elem) == NULL)
 		// break;
 	}
 	free(buff);

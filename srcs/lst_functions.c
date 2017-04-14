@@ -12,6 +12,20 @@
 
 #include "../includes/header.h"
 
+t_list				*ptrto_frst(t_list *elem)
+{
+  while (elem->prev != NULL)
+    elem = elem->prev;
+  return (elem);
+}
+
+t_list				*ptrto_last(t_list *elem)
+{
+  while (elem->next != NULL)
+    elem = elem->next;
+  return (elem);
+}
+
 void				ft_aff_lst(t_list *lst)
 {
 	t_list			*tmp;

@@ -1,7 +1,7 @@
-/* ************************************************************************** */
+* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   delete_key.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,27 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/header.h"
 
-t_list 		*ft_lstdelone(t_list **list, t_list *elem)
+t_list		*evkey_delete(t_data *ws, t_list **lst, t_list *elem)
 {
-  t_list	*previous;
-  t_list	*nextone;
-
-  if (elem->prev != NULL)
-      previous = elem->prev;
-  else
-    previous = NULL;
-  if (elem->next != NULL)
-      nextone = elem->next;
-  else
-    nextone = NULL;
-  free(elem->content);
-  free(elem);
-  previous->next = nextone;
-  nextone->prev = previous;
-  if (previous != NULL)
-    return (previous);
-  else
-    return (nextone);
+  elem = ptrto_frst;
+  while (elem->next)
+    {
+      if (elem->select == 1)
+	{
+	  elem = ft_lstdelone(lst, elem);
+	}
+      else
+	elem = elem->next;
+    }
+  if (elem->select == 1)
+    elem = ft_lstdelone(lst, elem);
+  elem = ptrto_frst(elem);  
+  return (elem);
 }

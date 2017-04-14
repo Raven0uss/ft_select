@@ -22,7 +22,7 @@ static void			tc_end(struct termios *term)
 {
 	term->c_lflag |= ICANON;
 	term->c_lflag |= ECHO;
-	tcsetattr(0, 0, term);
+	, 1	tcsetattr(0, 0, term);
 	tputs(tgetstr("me", NULL), 1, tc_out);
 	tputs(tgetstr("cl", NULL), 1, tc_out);
 	tputs(tgetstr("ve", NULL), 1, tc_out);
@@ -70,7 +70,8 @@ int					main(int ac, char **av)
 		return (-1);
 	sigft();
 	lst = lst_creator(av, ac);
-	ft_select(&lst, &term, &wsize);
+	wsize.term = &term;
+	ft_select(&lst, &wsize);
 	tc_end(&term);
 	return (0);
 }

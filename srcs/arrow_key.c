@@ -39,10 +39,11 @@ static t_list	*down(t_data *ws, t_list **lst, t_list *elem)
 		elem = elem->next;
 		ws->cy++;
 	}
-	/*else
+	else
 	{
+		elem = ptrto_frst(elem);
 		ws->cy = 0;
-		}*/
+       	}
 	tputs(tgoto(tgetstr("cm", NULL), ws->cx, ws->cy), 1, tc_out);
 	return (elem);
 }
@@ -54,10 +55,11 @@ static t_list	*up(t_data *ws, t_list **lst, t_list *elem)
 		elem = elem->prev;
 		ws->cy--;
 	}
-	/*else
+	else
 	{
+		elem = ptrto_last(elem);
 		ws->cy = ws->y;
-		}*/
+	}
 	tputs(tgoto(tgetstr("cm", NULL), ws->cx, ws->cy), 1, tc_out);
 	return (elem);
 }
@@ -68,7 +70,7 @@ t_list				*evkey_arrow(char *buff, t_data *ws,
 	int	key;
 
 	key = 0;
-	if ((int)buff[1] == 0)
+       	if ((int)buff[1] == 0)
 		return (NULL);
 	else if ((int)buff[1] == 91 && (int)buff[2])
 	{
@@ -82,7 +84,7 @@ t_list				*evkey_arrow(char *buff, t_data *ws,
 		else if (key == 68)
 		elem = left(ws, lst, elem);*/
 		else if (key == 51)
-			;//ft_putendl("Delete");
+			evkey_delete(ws, lst, elem);//ft_putendl("Delete");
 		else
 			return (elem);
 		return (elem);

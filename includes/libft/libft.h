@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+4.73/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
@@ -88,8 +88,7 @@ void					ft_putstr_fd(char const *s, int fd);
 void					ft_putendl_fd(char const *s, int fd);
 void					ft_putnbr_fd(int n, int fd);
 t_list					*ft_lstnew(char const *content);
-void					ft_lstdelone(t_list **alst,
-										void (*del)(char *));
+void					ft_lstdelone(t_list **list, t_list *elem);
 void					ft_lstdel(t_list **alst, void (*del)(char *));
 void					ft_lstadd(t_list **alst, t_list *new, int m);
 void					ft_lstiter(t_list *lst, void (*f)(t_list *elem));
