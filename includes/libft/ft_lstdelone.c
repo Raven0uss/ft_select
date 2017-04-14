@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-t_list 		*ft_lstdelone(t_list **list, t_list *elem)
+t_list 		*ft_lstdelone(t_list *elem)
 {
   t_list	*previous;
   t_list	*nextone;

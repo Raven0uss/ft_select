@@ -1,4 +1,4 @@
-* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   delete_key.c                                       :+:      :+:    :+:   */
@@ -14,18 +14,25 @@
 
 t_list		*evkey_delete(t_data *ws, t_list **lst, t_list *elem)
 {
-  elem = ptrto_frst;
+  int		nb;
+
+  nb = 0;
+  elem = ptrto_frst(elem);
   while (elem->next)
     {
       if (elem->select == 1)
 	{
-	  elem = ft_lstdelone(lst, elem);
+	  nb++;
+	  elem = ft_lstdelone(elem);
 	}
       else
 	elem = elem->next;
     }
   if (elem->select == 1)
-    elem = ft_lstdelone(lst, elem);
-  elem = ptrto_frst(elem);  
+    elem = ft_lstdelone(elem);
+  elem = ptrto_frst(elem);
+  ws->y -= nb;
+  ws->cy = 0;
+  init_select(elem, ws);
   return (elem);
 }

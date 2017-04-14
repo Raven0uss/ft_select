@@ -22,7 +22,7 @@ static void			tc_end(struct termios *term)
 {
 	term->c_lflag |= ICANON;
 	term->c_lflag |= ECHO;
-	, 1	tcsetattr(0, 0, term);
+	tcsetattr(0, 0, term);
 	tputs(tgetstr("me", NULL), 1, tc_out);
 	tputs(tgetstr("cl", NULL), 1, tc_out);
 	tputs(tgetstr("ve", NULL), 1, tc_out);
