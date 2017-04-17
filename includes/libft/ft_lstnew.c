@@ -23,6 +23,7 @@ t_list		*ft_lstnew(char const *content)
 	else
 		new->content = ft_strdup((char *)content);
 	new->select = 0;
+	new->cur = 0;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

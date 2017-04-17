@@ -25,6 +25,7 @@ typedef struct			s_list
 {
 	char				*content;
 	unsigned char		select;
+	unsigned char		cur;
 	struct s_list		*next;
 	struct s_list		*prev;
 }						t_list;

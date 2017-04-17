@@ -52,11 +52,25 @@ void		aff_tc(char *buff)
 void			init_select(t_list *elem, t_data *ws)
 {
 	tputs(tgetstr("cl", NULL), 1, tc_out);
-	//tputs(tgetstr("vi", NULL), 1, tc_out);
+	tputs(tgetstr("vi", NULL), 1, tc_out);
 	tputs(tgetstr("ms", NULL), 1, tc_out);
 	ft_aff_lst(elem);
 	//tputs(tgetstr("ue", NULL), 1, tc_out);
 	tputs(tgetstr("ho", NULL), 1, tc_out);
+}
+
+void		cursor(t_list *elem)
+{
+      tputs(tgetstr("us", NULL), 1, tc_out);
+      if (elem->select == 1)
+	{
+	  tputs(tgetstr("mr", NULL), 1, tc_out);
+	  ft_putstr(elem->content);
+	  tputs(tgetstr("me", NULL), 1, tc_out);
+	}
+      else
+	ft_putstr(elem->content);
+      tputs(tgetstr("ue", NULL), 1, tc_out);
 }
 
 char		*ft_select(t_list **lst, t_data *ws)
@@ -67,6 +81,7 @@ char		*ft_select(t_list **lst, t_data *ws)
 	buff = ft_strnew(3);
 	elem = *lst;
 	init_select(elem, ws);
+	cursor(elem);
 	while ((int)buff[0] != 10 && (int)buff[0] != 4)
 	{
 		ft_bzero((void *)buff, sizeof(buff));
@@ -83,6 +98,7 @@ char		*ft_select(t_list **lst, t_data *ws)
 				break ;
 		if ((int)buff[0] == 10 && (int)buff[1] == 0)
 			return (return_select(elem));
+		cursor(elem);
 	}
 	free(buff);
 	return (NULL);
