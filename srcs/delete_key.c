@@ -12,27 +12,47 @@
 
 #include "../includes/header.h"
 
+t_list		*refresh_man(t_data *ws, t_list **lst, t_list *elem, char **av)
+{
+  int		size;
+
+  size = ft_sizetab(av);
+  ft_lstdel(lst, ft_freestr);
+  *lst = lst_creator(av, size);
+  while (--size)
+    free(av[size]);
+  free(av[size]);
+  free(av);
+  ws->cy = 0;
+  elem = *lst;
+  init_select(elem, ws);
+  elem = ptrto_frst(elem);
+  return (elem);
+}
+
 t_list		*evkey_delete(t_data *ws, t_list **lst, t_list *elem)
 {
-  int		nb;
+  char		**av;
+  unsigned int	i;
 
-  nb = 0;
+  i = 0;
   elem = ptrto_frst(elem);
+  if (!(av = malloc(sizeof(char *) * (ws->y + 2))))
+    return (NULL);
+  av[i++] = ft_strdup("ft_select");
   while (elem->next)
     {
       if (elem->select == 1)
-	{
-	  nb++;
-	  elem = ft_lstdelone(elem);
-	}
+	ws->y--;
       else
-	elem = elem->next;
+	av[i++] = ft_strdup(elem->content);
+      elem = elem->next;
     }
   if (elem->select == 1)
-    elem = ft_lstdelone(elem);
-  elem = ptrto_frst(elem);
-  ws->y -= nb;
-  ws->cy = 0;
-  init_select(elem, ws);
+    ws->y--;
+  else
+    av[i++] = ft_strdup(elem->content);
+  av[i] = NULL;
+  elem = refresh_man(ws, lst, elem, av);
   return (elem);
 }

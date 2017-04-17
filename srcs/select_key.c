@@ -12,9 +12,9 @@
 
 #include "../includes/header.h"
 
-static t_list				*uon_line(int mode, t_list *elem, t_data *ws)
+static t_list				*uon_line(t_list *elem, t_data *ws)
 {
-	if (mode)
+	if (elem->select == 0)
 	{
 		tputs(tgetstr("mr", NULL), 1, tc_out);
 		ft_putstr(elem->content);
@@ -33,12 +33,6 @@ static t_list				*uon_line(int mode, t_list *elem, t_data *ws)
 t_list	*evkey_select(char *buff, t_data *ws, t_list **lst, t_list *elem)
 {
 	if ((int)buff[1] == 0)
-	{
-		if (!elem->select)
-			elem = uon_line(1, elem, ws);
-		else
-			elem = uon_line(0, elem, ws);
-		return (elem);
-	}
-	return (NULL);
+	  elem = uon_line(elem, ws);
+       	return (elem);
 }

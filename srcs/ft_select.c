@@ -52,7 +52,7 @@ void		ft_select(t_list **lst, t_data *ws)
 			if ((elem = evkey_select(buff, ws, lst, elem)) == NULL)
 				break ;
 		if ((int)buff[0] == 127) //Backspace
-			if (evkey_delete(ws, lst, elem) == NULL)
+		  if ((elem = evkey_delete(ws, lst, elem)) == NULL)
 				break ;
 	}
 	free(buff);

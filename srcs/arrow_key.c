@@ -34,7 +34,7 @@ static t_list	*left(t_data *ws, t_list **lst, t_list *elem)
 
 static t_list	*down(t_data *ws, t_list **lst, t_list *elem)
 {
-	if (ws->cy != ws->y)
+	if (ws->cy != ws->y && elem->next)
 	{
 		elem = elem->next;
 		ws->cy++;
@@ -50,7 +50,7 @@ static t_list	*down(t_data *ws, t_list **lst, t_list *elem)
 
 static t_list	*up(t_data *ws, t_list **lst, t_list *elem)
 {
-	if (ws->cy != 0)
+	if (ws->cy != 0 && elem->prev)
 	{
 		elem = elem->prev;
 		ws->cy--;
@@ -84,7 +84,7 @@ t_list				*evkey_arrow(char *buff, t_data *ws,
 		else if (key == 68)
 		elem = left(ws, lst, elem);*/
 		else if (key == 51)
-			evkey_delete(ws, lst, elem);//ft_putendl("Delete");
+			elem = evkey_delete(ws, lst, elem);
 		else
 			return (elem);
 		return (elem);
