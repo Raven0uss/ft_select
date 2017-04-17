@@ -34,5 +34,6 @@ t_list	*evkey_select(char *buff, t_data *ws, t_list **lst, t_list *elem)
 {
 	if ((int)buff[1] == 0)
 	  elem = uon_line(elem, ws);
+	elem = down(ws, lst, elem);
        	return (elem);
 }

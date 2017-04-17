@@ -12,6 +12,33 @@
 
 #include "../includes/header.h"
 
+static char	*return_select(t_list *elem)
+{
+  char		*str;
+
+  str = NULL;
+  elem = ptrto_frst(elem);
+  while (elem->next)
+    {
+      if (elem->select == 1)
+	{
+	  if (str == NULL)
+	    str = ft_strdup(elem->content);
+	  else
+	    str = ft_strjoin(str, elem->content);
+	}
+      elem = elem->next;
+    }
+  if (elem->select == 1)
+    {
+      if (str == NULL)
+	str = ft_strdup(elem->content);
+      else
+	str = ft_strjoin(str, elem->content);
+    }
+  return (str);
+}
+
 void		aff_tc(char *buff)
 {
 	ft_putnbr((int)buff[0]);
@@ -32,7 +59,7 @@ void			init_select(t_list *elem, t_data *ws)
 	tputs(tgetstr("ho", NULL), 1, tc_out);
 }
 
-void		ft_select(t_list **lst, t_data *ws)
+char		*ft_select(t_list **lst, t_data *ws)
 {
 	t_list	*elem;
 	char	*buff;
@@ -54,8 +81,11 @@ void		ft_select(t_list **lst, t_data *ws)
 		if ((int)buff[0] == 127) //Backspace
 		  if ((elem = evkey_delete(ws, lst, elem)) == NULL)
 				break ;
+		if ((int)buff[0] == 10 && (int)buff[1] == 0)
+			return (return_select(elem));
 	}
 	free(buff);
+	return (NULL);
 }
 
 

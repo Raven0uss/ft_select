@@ -32,7 +32,7 @@ static t_list	*left(t_data *ws, t_list **lst, t_list *elem)
 	return (elem);
 }
 
-static t_list	*down(t_data *ws, t_list **lst, t_list *elem)
+t_list	*down(t_data *ws, t_list **lst, t_list *elem)
 {
 	if (ws->cy != ws->y && elem->next)
 	{
@@ -48,7 +48,7 @@ static t_list	*down(t_data *ws, t_list **lst, t_list *elem)
 	return (elem);
 }
 
-static t_list	*up(t_data *ws, t_list **lst, t_list *elem)
+t_list	*up(t_data *ws, t_list **lst, t_list *elem)
 {
 	if (ws->cy != 0 && elem->prev)
 	{

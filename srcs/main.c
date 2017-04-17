@@ -58,20 +58,21 @@ static int			tc_init(struct termios *term)
 	return (1);
 }
 
-int					main(int ac, char **av)
+char					*main(int ac, char **av)
 {
 	struct termios	term;
 	t_data		wsize;
 	t_list			*lst;
+	char		*ret;
 
 	if (ac == 1)
-		return (0);
+		return (NULL);
 	if (!tc_init(&term) || !ws_init(&wsize, (unsigned int)(ac - 1)))
-		return (-1);
+		return (NULL);
 	sigft();
 	lst = lst_creator(av, ac);
 	wsize.term = &term;
-	ft_select(&lst, &wsize);
+	ret = ft_select(&lst, &wsize);
 	tc_end(&term);
-	return (0);
+	return (ret);
 }
