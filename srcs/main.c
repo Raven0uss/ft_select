@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 10:57:31 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/13 20:21:16 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/18 14:38:58 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,21 @@ static int			tc_init(struct termios *term)
 	return (1);
 }
 
-char					*main(int ac, char **av)
+int					main(int ac, char **av, char **envp)
 {
 	struct termios	term;
 	t_data		wsize;
 	t_list			*lst;
-	char		*ret;
 
 	if (ac == 1)
-		return (NULL);
+		return (-1);
+	env_init(envp);
 	if (!tc_init(&term) || !ws_init(&wsize, (unsigned int)(ac - 1)))
-		return (NULL);
+		return (-1);
 	sigft();
 	lst = lst_creator(av, ac);
 	wsize.term = &term;
-	ret = ft_select(&lst, &wsize);
+	ft_select(&lst, &wsize);
 	tc_end(&term);
-	return (ret);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 19:01:42 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/13 20:18:55 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/18 13:56:22 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,17 @@ static t_list				*uon_line(t_list *elem, t_data *ws)
 		elem->select = 0;
 		ft_putstr(elem->content);
 	}
-	tputs(tgoto(tgetstr("cm", NULL), ws->cx, ws->cy), 1, tc_out);
+	tputs(tgoto(tgetstr("cm", NULL), 0, ws->cy), 1, tc_out);
 	return (elem);
 }
 
 t_list	*evkey_select(char *buff, t_data *ws, t_list **lst, t_list *elem)
 {
 	if ((int)buff[1] == 0)
-	  elem = uon_line(elem, ws);
+		elem = uon_line(elem, ws);
+	else
+		return (elem);
 	elem = down(ws, lst, elem);
-       	return (elem);
+	cursor(elem, ws, 1);
+	return (elem);
 }

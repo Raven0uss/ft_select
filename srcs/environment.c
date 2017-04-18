@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sigft.c                                            :+:      :+:    :+:   */
+/*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/26 10:39:14 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/18 18:45:25 by sbelazou         ###   ########.fr       */
+/*   Created: 2017/04/18 14:30:43 by sbelazou          #+#    #+#             */
+/*   Updated: 2017/04/18 14:38:23 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-static void	sigwft(int x)
+void				env_init(char **envp)
 {
-	(void)x;
-}
+	unsigned int	i;
 
-static void	sigcft(int x)
-{
-	(void)x;
-}
-
-void		sigft(t_data *ws, t_list *elem)
-{
-	void	*sigw;
-	void	*sigc;
-
-	sigw = &sigwft;
-	sigc = &sigcft;
-	signal(SIGWINCH, sigw);
-	signal(SIGCONT, sigc);
-	//tputs
+	i = 0;
+	while (envp[i])
+		if (ft_strncmp(envp[i], "TERM=", 5))
+		{
+			envp[i] = "TERM=xterm-256color\0";
+			return ;
+		}
+		else
+			i++;
+	envp[i] = "TERM=xterm-256color\0";
+	envp[i++] = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 15:13:19 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/13 20:54:21 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/18 15:01:41 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static t_list	*left(t_data *ws, t_list **lst, t_list *elem)
 
 t_list	*down(t_data *ws, t_list **lst, t_list *elem)
 {
+	cursor(elem, ws, 0);
 	if (ws->cy != ws->y && elem->next)
 	{
 		elem = elem->next;
@@ -45,11 +46,13 @@ t_list	*down(t_data *ws, t_list **lst, t_list *elem)
 		ws->cy = 0;
        	}
 	tputs(tgoto(tgetstr("cm", NULL), ws->cx, ws->cy), 1, tc_out);
+	cursor(elem, ws, 1);
 	return (elem);
 }
 
 t_list	*up(t_data *ws, t_list **lst, t_list *elem)
 {
+	cursor(elem, ws, 0);
 	if (ws->cy != 0 && elem->prev)
 	{
 		elem = elem->prev;
@@ -61,6 +64,7 @@ t_list	*up(t_data *ws, t_list **lst, t_list *elem)
 		ws->cy = ws->y;
 	}
 	tputs(tgoto(tgetstr("cm", NULL), ws->cx, ws->cy), 1, tc_out);
+	cursor(elem, ws, 1);
 	return (elem);
 }
 
@@ -75,16 +79,26 @@ t_list				*evkey_arrow(char *buff, t_data *ws,
 	else if ((int)buff[1] == 91 && (int)buff[2])
 	{
 		key = (int)buff[2];
-		if (key == 65)
+		if (key == 65 || key == 67)
 			elem = up(ws, lst, elem);
-		else if (key == 66)
+		else if (key == 66 || key == 68)
 			elem = down(ws, lst, elem);
-		/*else if (key == 67)
-			elem = right(ws, lst, elem);
-		else if (key == 68)
-		elem = left(ws, lst, elem);*/
 		else if (key == 51)
 			elem = evkey_delete(ws, lst, elem);
+		else if (key == 70)
+		{
+			ws->cy = ws->y;
+			cursor(elem, ws, 0);
+			elem = ptrto_last(elem);
+			cursor(elem, ws, 1);
+		}
+		else if (key == 72)
+		{
+			ws->cy = 0;
+			cursor(elem, ws, 0);
+			elem = ptrto_frst(elem);
+			cursor(elem, ws, 1);
+		}
 		else
 			return (elem);
 		return (elem);

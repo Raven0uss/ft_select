@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:29:38 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/13 20:56:24 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/18 19:39:04 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@
 typedef struct			s_list
 {
 	char				*content;
-	unsigned char		select;
-	unsigned char		cur;
+	unsigned int		select;
 	struct s_list		*next;
 	struct s_list		*prev;
 }						t_list;
