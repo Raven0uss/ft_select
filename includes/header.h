@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 20:16:53 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/18 15:13:54 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/27 10:56:52 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct	s_data
 	struct termios		*term;
 }				t_data;
 
-void			sigft(t_data *ws, t_list *elem);
+void			sigft();
 t_list			*lst_creator(char **av, int ac);
 void			ft_aff_lst(t_list *lst);
 char			*ft_select(t_list **lst, t_data *ws);
