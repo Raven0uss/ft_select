@@ -6,38 +6,44 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 12:48:17 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/18 18:45:05 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/27 16:20:55 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-/*static char	*return_select(t_list *elem)
+static char	*ret_select(t_list *elem)
 {
-  char		*str;
+	char		*str;
+	int			len;
 
-  str = NULL;
-  elem = ptrto_frst(elem);
-  while (elem->next)
+	str = NULL;
+	elem = ptrto_frst(elem);
+	while (elem->next)
     {
-      if (elem->select == 1)
-	{
-	  if (str == NULL)
-	    str = ft_strdup(elem->content);
-	  else
-	    str = ft_strjoin(str, elem->content);
-	}
-      elem = elem->next;
+		if (elem->select == 1)
+		{
+			if (str == NULL)
+				str = ft_strdup(elem->content);
+			else
+			{
+				len = ft_strlen(str);
+				str[len] = ' ';
+				str[len + 1] = 0;
+				str = ft_strjoin(str, elem->content);
+			}
+		}
+		elem = elem->next;
     }
-  if (elem->select == 1)
+	if (elem->select == 1)
     {
-      if (str == NULL)
-	str = ft_strdup(elem->content);
-      else
-	str = ft_strjoin(str, elem->content);
+		if (str == NULL)
+			str = ft_strdup(elem->content);
+		else
+			str = ft_strjoin(str, elem->content);
     }
-  return (str);
-}*/
+	return (str);
+}
 
 void		aff_tc(char *buff)
 {
@@ -54,7 +60,7 @@ void			init_select(t_list *elem, t_data *ws)
 	tputs(tgetstr("cl", NULL), 1, tc_out);
 	tputs(tgetstr("vi", NULL), 1, tc_out);
 	tputs(tgetstr("ms", NULL), 1, tc_out);
-	ft_aff_lst(elem);
+	ft_aff_lst(elem, ws);
 	tputs(tgetstr("ho", NULL), 1, tc_out);
 }
 
@@ -111,8 +117,8 @@ char		*ft_select(t_list **lst, t_data *ws)
 		if ((int)buff[0] == 127) //Backspace
 		  if ((elem = evkey_delete(ws, lst, elem)) == NULL)
 				break ;
-		if ((int)buff[0] == 10 && (int)buff[1] == 0)
-			return (NULL); //Enter
+		if ((int)buff[0] == 13)
+			return (ret_select(elem)); //Enter
 	}
 	free(buff);
 	return (NULL);

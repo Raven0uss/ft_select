@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 15:13:19 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/18 15:01:41 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/27 14:16:48 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ t_list	*up(t_data *ws, t_list **lst, t_list *elem)
 }
 
 t_list				*evkey_arrow(char *buff, t_data *ws,
-								t_list **lst, t_list *elem)
+								 t_list **lst, t_list *elem)
 {
 	int	key;
 
 	key = 0;
-       	if ((int)buff[1] == 0)
+	if ((int)buff[1] == 0)
 		return (NULL);
 	else if ((int)buff[1] == 91 && (int)buff[2])
 	{
@@ -83,8 +83,8 @@ t_list				*evkey_arrow(char *buff, t_data *ws,
 			elem = up(ws, lst, elem);
 		else if (key == 66 || key == 68)
 			elem = down(ws, lst, elem);
-		else if (key == 51)
-			elem = evkey_delete(ws, lst, elem);
+		else if (key == 51 && (elem = evkey_delete(ws, lst, elem)) == NULL)
+			return (NULL);
 		else if (key == 70)
 		{
 			ws->cy = ws->y;

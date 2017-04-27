@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 10:57:31 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/18 14:38:58 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/27 16:24:52 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int					main(int ac, char **av, char **envp)
 	struct termios	term;
 	t_data		wsize;
 	t_list			*lst;
+	char		*ret;
 
 	if (ac == 1)
 		return (-1);
@@ -72,7 +73,12 @@ int					main(int ac, char **av, char **envp)
 	sigft();
 	lst = lst_creator(av, ac);
 	wsize.term = &term;
-	ft_select(&lst, &wsize);
+	wsize.fd = 1;
+	if ((wsize.fd = open("/dev/tty", O_RDWR)) == -1)
+		return (-1);
+	if ((ret = ft_select(&lst, &wsize)))
+		ft_putstr_fd(ret, wsize.fd);
+	close(wsize.fd);
 	tc_end(&term);
 	return (0);
 }
