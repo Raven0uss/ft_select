@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 10:57:31 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/27 16:24:52 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/27 16:40:29 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ static int			tc_init(struct termios *term)
 int					main(int ac, char **av, char **envp)
 {
 	struct termios	term;
-	t_data		wsize;
+	t_data			wsize;
 	t_list			*lst;
-	char		*ret;
+	char			*ret;
 
 	if (ac == 1)
 		return (-1);

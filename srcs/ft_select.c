@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 12:48:17 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/27 16:20:55 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/27 16:42:29 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static char	*ret_select(t_list *elem)
 {
-	char		*str;
-	int			len;
+	char	*str;
+	int		len;
 
 	str = NULL;
 	elem = ptrto_frst(elem);
@@ -55,7 +55,7 @@ void		aff_tc(char *buff)
 	ft_putchar('\n');
 }
 
-void			init_select(t_list *elem, t_data *ws)
+void		init_select(t_list *elem, t_data *ws)
 {
 	tputs(tgetstr("cl", NULL), 1, tc_out);
 	tputs(tgetstr("vi", NULL), 1, tc_out);

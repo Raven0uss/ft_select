@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 15:13:19 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/27 14:16:48 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/27 16:41:13 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_list	*left(t_data *ws, t_list **lst, t_list *elem)
 	return (elem);
 }
 
-t_list	*down(t_data *ws, t_list **lst, t_list *elem)
+t_list			*down(t_data *ws, t_list **lst, t_list *elem)
 {
 	cursor(elem, ws, 0);
 	if (ws->cy != ws->y && elem->next)
@@ -50,7 +50,7 @@ t_list	*down(t_data *ws, t_list **lst, t_list *elem)
 	return (elem);
 }
 
-t_list	*up(t_data *ws, t_list **lst, t_list *elem)
+t_list			*up(t_data *ws, t_list **lst, t_list *elem)
 {
 	cursor(elem, ws, 0);
 	if (ws->cy != 0 && elem->prev)
@@ -68,10 +68,10 @@ t_list	*up(t_data *ws, t_list **lst, t_list *elem)
 	return (elem);
 }
 
-t_list				*evkey_arrow(char *buff, t_data *ws,
+t_list			*evkey_arrow(char *buff, t_data *ws,
 								 t_list **lst, t_list *elem)
 {
-	int	key;
+	int			key;
 
 	key = 0;
 	if ((int)buff[1] == 0)
