@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 20:16:53 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/27 16:45:50 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/27 17:18:10 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/ioctl.h>
 # include "libft/libft.h"
 
-typedef struct	s_data
+typedef struct		s_data
 {
 	int				fd;
 	int				x;

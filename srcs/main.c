@@ -6,11 +6,29 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 10:57:31 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/27 16:40:29 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/27 17:50:48 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
+
+// ====
+// == Partie Obligatoire ==
+// ==== [ToDo] ====
+// [KO] Environnement vide
+// [KO] Signaux (Redimension, Ctrl-z + fg)
+// [KO] Renvoyer correctement le retour-selection
+// ====
+// == Partie Bonus ==
+// ====
+// 1 [OK]- HOME et END, Debut et fin de liste
+// 2 [OK]- Selection + suppression multiple
+// 3 [KO]- Navigation gauche droite lorsque terminal trop petit
+// 4 [KO]- Belle Interface
+// 5 [KO]-
+// ====
+// ==== [ft_select - 85 % ] ====
+// ====
 
 int					tc_out(int c)
 {
@@ -77,7 +95,11 @@ int					main(int ac, char **av, char **envp)
 	if ((wsize.fd = open("/dev/tty", O_RDWR)) == -1)
 		return (-1);
 	if ((ret = ft_select(&lst, &wsize)))
-		ft_putstr_fd(ret, wsize.fd);
+	{
+		ft_putstr_fd(ret, 1);
+		ft_putchar('\n');
+		free(ret);
+	}
 	close(wsize.fd);
 	tc_end(&term);
 	return (0);
