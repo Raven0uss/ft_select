@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:20:35 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/27 16:16:52 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/28 12:26:02 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void				ft_aff_lst(t_list *lst, t_data *ws)
 	while (tmp->next != NULL)
 	{
 		if (tmp->content != NULL)
-			ft_putendl(tmp->content);
+			ft_putendl_fd(tmp->content, ws->fd);
 		tmp = tmp->next;
 	}
 	if (tmp->content != NULL)
-		ft_putendl(tmp->content);
+		ft_putendl_fd(tmp->content, ws->fd);
 }
 
 t_list				*lst_creator(char **av, int ac)

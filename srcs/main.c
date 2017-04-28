@@ -6,16 +6,17 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 10:57:31 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/27 19:40:52 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/28 13:03:05 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
+
 // ====
 // == Partie Obligatoire ==
 // ==== [ToDo] ====
 // [KO] Environnement vide
-// [KO] Signaux (Redimension, Ctrl-z + fg)
+// [KO] Signaux (Redimension, Ctrl-z + fg, Ctrl-C avec fin des TC)
 // [KO] Renvoyer correctement le retour-selection
 // ====
 // == Partie Bonus ==
@@ -30,9 +31,18 @@
 // Notes :
 //
 // ====
+
 int					tc_out(int c)
 {
-	ft_putchar((char)c);
+	int				fd;
+
+	if ((fd = open("/dev/tty", O_RDWR)) == -1)
+	{
+		ft_putendl_fd("Error: Can't open /dev/tty.", 2);
+		exit(-1);
+	}
+	ft_putchar_fd((char)c, fd);
+	close(fd);
 	return (0);
 }
 
@@ -90,15 +100,9 @@ int					main(int ac, char **av, char **envp)
 		return (-1);
 	lst = lst_creator(av, ac);
 	wsize.term = &term;
-	wsize.fd = 1;
 	if ((wsize.fd = open("/dev/tty", O_RDWR)) == -1)
 		return (-1);
-	if ((ret = ft_select(&lst, &wsize)))
-	{
-		ft_putstr_fd(ret, 1);
-		ft_putchar('\n');
-		free(ret);
-	}
+	ft_select(&lst, &wsize);
 	close(wsize.fd);
 	tc_end(&term);
 	return (0);

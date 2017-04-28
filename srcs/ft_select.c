@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 12:48:17 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/27 16:42:29 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/28 12:46:49 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,29 @@
 
 static char	*ret_select(t_list *elem)
 {
-	char	*str;
-	int		len;
+	int		flag;
 
-	str = NULL;
+	flag = 0;
 	elem = ptrto_frst(elem);
 	while (elem->next)
     {
-		if (elem->select == 1)
+		if (elem->select == 1 && ++flag)
 		{
-			if (str == NULL)
-				str = ft_strdup(elem->content);
-			else
-			{
-				len = ft_strlen(str);
-				str[len] = ' ';
-				str[len + 1] = 0;
-				str = ft_strjoin(str, elem->content);
-			}
+			if (flag > 1)
+				ft_putchar_fd(' ', 1);
+			ft_putstr_fd(elem->content, 1);
 		}
 		elem = elem->next;
     }
-	if (elem->select == 1)
+	if (elem->select == 1 && ++flag)
     {
-		if (str == NULL)
-			str = ft_strdup(elem->content);
-		else
-			str = ft_strjoin(str, elem->content);
+		if (flag > 1)
+			ft_putchar_fd(' ', 1);
+		ft_putstr_fd(elem->content, 1);
     }
-	return (str);
+	if (flag)
+		ft_putchar_fd('\n', 1);
+	return (NULL);
 }
 
 void		aff_tc(char *buff)
@@ -72,11 +66,11 @@ void		cursor(t_list *elem, t_data *ws, unsigned char mode)
 			if (elem->select)
 			{
 				tputs(tgetstr("mr", NULL), 1, tc_out);
-				ft_putstr(elem->content);
+				ft_putstr_fd(elem->content, ws->fd);
 				tputs(tgetstr("me", NULL), 1, tc_out);
 			}
 			else
-				ft_putstr(elem->content);
+				ft_putstr_fd(elem->content, ws->fd);
 			tputs(tgetstr("ue", NULL), 1, tc_out);
 		}
 		else
@@ -84,11 +78,11 @@ void		cursor(t_list *elem, t_data *ws, unsigned char mode)
 			if (elem->select)
 			{
 				tputs(tgetstr("mr", NULL), 1, tc_out);
-				ft_putstr(elem->content);
+				ft_putstr_fd(elem->content, ws->fd);
 				tputs(tgetstr("me", NULL), 1, tc_out);
 			}
 			else
-				ft_putstr(elem->content);
+				ft_putstr_fd(elem->content, ws->fd);
 		}
 	tputs(tgoto(tgetstr("cm", NULL), 0, ws->cy), 1, tc_out);
 }
@@ -118,7 +112,8 @@ char		*ft_select(t_list **lst, t_data *ws)
 		  if ((elem = evkey_delete(ws, lst, elem)) == NULL)
 				break ;
 		if ((int)buff[0] == 13)
-			return (ret_select(elem)); //Enter
+			if (ret_select(elem) == NULL)
+				break ;//Enter
 	}
 	free(buff);
 	return (NULL);
