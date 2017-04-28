@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 10:57:31 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/28 17:35:38 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:41:23 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int					tc_out(int c)
 	return (0);
 }
 
-static void			tc_end(struct termios *term)
+void			tc_end(struct termios *term)
 {
 	term->c_lflag |= ICANON;
 	term->c_lflag |= ECHO;
@@ -82,7 +82,7 @@ int					ws_init(t_data *wsize, unsigned int n)
 	return (1);
 }
 
-static int			tc_init(struct termios *term)
+int			tc_init(struct termios *term)
 {
 	char			buff[128];
 

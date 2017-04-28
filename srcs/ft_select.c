@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 12:48:17 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/28 16:59:18 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:39:51 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ char		*ft_select(t_data *ws)
 	cursor(elem, ws, 1);
 	while ((int)buff[0] != 10 && (int)buff[0] != 4)
 	{
-		sigft(ws, elem);
+		ws = ((t_data *)keepmem());
+		sigft();
 		ft_bzero((void *)buff, sizeof(buff));
 		read(0, buff, 3);
 		//aff_tc(buff);
