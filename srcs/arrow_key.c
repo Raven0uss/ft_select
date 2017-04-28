@@ -6,13 +6,13 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 15:13:19 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/27 16:41:13 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:01:28 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-static t_list	*right(t_data *ws, t_list **lst, t_list *elem)
+static t_list	*right(t_data *ws, t_list *elem)
 {
 	if (ws->cx != ws->x)
 	{
@@ -22,7 +22,7 @@ static t_list	*right(t_data *ws, t_list **lst, t_list *elem)
 	return (elem);
 }
 
-static t_list	*left(t_data *ws, t_list **lst, t_list *elem)
+static t_list	*left(t_data *ws, t_list *elem)
 {
 	if (ws->cx != 0)
 	{
@@ -32,7 +32,7 @@ static t_list	*left(t_data *ws, t_list **lst, t_list *elem)
 	return (elem);
 }
 
-t_list			*down(t_data *ws, t_list **lst, t_list *elem)
+t_list			*down(t_data *ws, t_list *elem)
 {
 	cursor(elem, ws, 0);
 	if (ws->cy != ws->y && elem->next)
@@ -50,7 +50,7 @@ t_list			*down(t_data *ws, t_list **lst, t_list *elem)
 	return (elem);
 }
 
-t_list			*up(t_data *ws, t_list **lst, t_list *elem)
+t_list			*up(t_data *ws, t_list *elem)
 {
 	cursor(elem, ws, 0);
 	if (ws->cy != 0 && elem->prev)
@@ -68,8 +68,7 @@ t_list			*up(t_data *ws, t_list **lst, t_list *elem)
 	return (elem);
 }
 
-t_list			*evkey_arrow(char *buff, t_data *ws,
-								 t_list **lst, t_list *elem)
+t_list			*evkey_arrow(char *buff, t_data *ws, t_list *elem)
 {
 	int			key;
 
@@ -80,10 +79,10 @@ t_list			*evkey_arrow(char *buff, t_data *ws,
 	{
 		key = (int)buff[2];
 		if (key == 65 || key == 67)
-			elem = up(ws, lst, elem);
+			elem = up(ws, elem);
 		else if (key == 66 || key == 68)
-			elem = down(ws, lst, elem);
-		else if (key == 51 && (elem = evkey_delete(ws, lst, elem)) == NULL)
+			elem = down(ws, elem);
+		else if (key == 51 && (elem = evkey_delete(ws, elem)) == NULL)
 			return (NULL);
 		else if (key == 70)
 		{

@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 10:57:31 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/28 13:28:44 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:35:38 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@
 // ====
 // ==== [ft_select - 85 % ] ====
 // Notes :
+//((t_list *)keep_my_memory())->arg = arg;
+//((t_list *)keep_my_memory())->term = term;
+//    STATIC ID
+//  void			*keep_my_memory(void)
+//  {
+//	static t_list	*list = NULL;
+//
+//	if (list == NULL)
+//		list = (t_list *)malloc(sizeof(*list));
+//	return (inst);
+//  }
 //
 // ====
 
@@ -89,21 +100,20 @@ static int			tc_init(struct termios *term)
 int					main(int ac, char **av, char **envp)
 {
 	struct termios	term;
-	t_data			wsize;
-	t_list			*lst;
 	char			*ret;
 
 	if (ac == 1)
-		return (-1);
+		return (0);
 	env_init(envp);
-	if (!tc_init(&term) || !ws_init(&wsize, (unsigned int)(ac - 1)))
+	if (!tc_init(&term) ||
+		!ws_init(((t_data *)keepmem()), (unsigned int)(ac - 1)))
 		return (-1);
-	lst = lst_creator(av, ac);
-	wsize.term = &term;
-	if ((wsize.fd = open("/dev/tty", O_RDWR)) == -1)
+	((t_data *)keepmem())->term = &term;
+	((t_data *)keepmem())->lst = lst_creator(av, ac);
+	if ((((t_data *)keepmem())->fd = open("/dev/tty", O_RDWR)) == -1)
 		return (-1);
-	ft_select(&lst, &wsize);
-	close(wsize.fd);
+	ft_select((t_data *)keepmem());
+	close(((t_data *)keepmem)->fd);
 	tc_end(&term);
 	return (0);
 }

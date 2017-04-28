@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 12:48:17 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/28 12:46:49 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/28 16:59:18 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ void		cursor(t_list *elem, t_data *ws, unsigned char mode)
 	tputs(tgoto(tgetstr("cm", NULL), 0, ws->cy), 1, tc_out);
 }
 
-char		*ft_select(t_list **lst, t_data *ws)
+char		*ft_select(t_data *ws)
 {
 	t_list	*elem;
 	char	*buff;
 
 	buff = ft_strnew(3);
-	elem = *lst;
+	elem = ws->lst;
 	init_select(elem, ws);
 	cursor(elem, ws, 1);
 	while ((int)buff[0] != 10 && (int)buff[0] != 4)
@@ -103,13 +103,13 @@ char		*ft_select(t_list **lst, t_data *ws)
 		read(0, buff, 3);
 		//aff_tc(buff);
 		if ((int)buff[0] == 27)
-			if ((elem = evkey_arrow(buff, ws, lst, elem)) == NULL)
+			if ((elem = evkey_arrow(buff, ws, elem)) == NULL)
 				break ;
 		if ((int)buff[0] == 32) //Space
-			if ((elem = evkey_select(buff, ws, lst, elem)) == NULL)
+			if ((elem = evkey_select(buff, ws, elem)) == NULL)
 				break ;
 		if ((int)buff[0] == 127) //Backspace
-		  if ((elem = evkey_delete(ws, lst, elem)) == NULL)
+		  if ((elem = evkey_delete(ws, elem)) == NULL)
 				break ;
 		if ((int)buff[0] == 13)
 			if (ret_select(elem) == NULL)

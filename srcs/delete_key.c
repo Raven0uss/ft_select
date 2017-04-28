@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:06:28 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/27 15:17:30 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:02:56 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_list				*relinker(t_list *elem)
 	return (elem);
 }
 
-t_list				*evkey_delete(t_data *ws, t_list **lst, t_list *elem)
+t_list				*evkey_delete(t_data *ws, t_list *elem)
 {
 	unsigned int	flag;
 
