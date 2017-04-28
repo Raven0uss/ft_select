@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 10:57:31 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/28 13:03:05 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/04/28 13:28:44 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 // ====
 // == Partie Obligatoire ==
 // ==== [ToDo] ====
-// [KO] Environnement vide
-// [KO] Signaux (Redimension, Ctrl-z + fg, Ctrl-C avec fin des TC)
-// [KO] Renvoyer correctement le retour-selection
+// [KO]| Environnement vide
+// [KO]| Signaux (Redimension, Ctrl-z + fg, Ctrl-C avec fin des TC)
+// [KO]| Renvoyer correctement le retour-selection
 // ====
 // == Partie Bonus ==
 // ====
-// 1 [ok]- HOME et END, Debut et fin de liste
-// 2 [ok]- Selection + suppression multiple
+// 1 [OK]- HOME et END, Debut et fin de liste
+// 2 [OK]- Selection + suppression multiple
 // 3 [KO]- Navigation gauche droite lorsque terminal trop petit
 // 4 [KO]- Interface
 // 5 [KO]- Recherche Dynamique
