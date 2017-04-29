@@ -17,7 +17,7 @@
 // ==== [ToDo] ====
 // [KO]| Environnement vide (Pour le moment aucun comportement...)
 // [90% - OK - OK]| Signaux (Redimension, Ctrl-z + fg, Ctrl-C avec fin des TC)
-// Redimension : S'adapter par rapport à la taille de la fenêtre
+// Redimension : S'adapter par rapport à la taille de la fenêtre, decouper l affichage en colonne
 // [KO]| Renvoyer correctement le retour-selection (exec simple de la cmd)
 // ====
 // == Partie Bonus ==
@@ -30,7 +30,7 @@
 // ====
 // ==== [ft_select - 85 % ] ====
 // Notes :
-//
+// struct winsize w ; w.ws_col && w.ws_row
 // ====
 
 int					tc_out(int c)
