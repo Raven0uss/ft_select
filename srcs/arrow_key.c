@@ -12,95 +12,69 @@
 
 #include "../includes/header.h"
 
-static t_list	*right(t_data *ws, t_list *elem)
+void			down()
 {
-	if (ws->cx != ws->x)
+	cursor(0);
+	if (((t_data *)keepmem())->cy != ((t_data *)keepmem())->y && ((t_data *)keepmem())->elem->next)
 	{
-		ws->cx++;
-		tputs(tgoto(tgetstr("cm", NULL), ws->cx, ws->cy), 1, tc_out);
-	}
-	return (elem);
-}
-
-static t_list	*left(t_data *ws, t_list *elem)
-{
-	if (ws->cx != 0)
-	{
-		ws->cx--;
-		tputs(tgoto(tgetstr("cm", NULL), ws->cx, ws->cy), 1, tc_out);
-	}
-	return (elem);
-}
-
-t_list			*down(t_data *ws, t_list *elem)
-{
-	cursor(elem, ws, 0);
-	if (ws->cy != ws->y && elem->next)
-	{
-		elem = elem->next;
-		ws->cy++;
+	  ((t_data *)keepmem())->elem = ((t_data *)keepmem())->elem->next;
+	  ((t_data *)keepmem())->cy++;
 	}
 	else
 	{
-		elem = ptrto_frst(elem);
-		ws->cy = 0;
+	  ((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
+	  ((t_data *)keepmem())->cy = 0;
        	}
-	tputs(tgoto(tgetstr("cm", NULL), ws->cx, ws->cy), 1, tc_out);
-	cursor(elem, ws, 1);
-	return (elem);
+	tputs(tgoto(tgetstr("cm", NULL), ((t_data *)keepmem())->cx, ((t_data *)keepmem())->cy), 1, tc_out);
+	cursor(1);
 }
 
-t_list			*up(t_data *ws, t_list *elem)
+void			up()
 {
-	cursor(elem, ws, 0);
-	if (ws->cy != 0 && elem->prev)
+	cursor(0);
+	if (((t_data *)keepmem())->cy != 0 && ((t_data *)keepmem())->elem->prev)
 	{
-		elem = elem->prev;
-		ws->cy--;
+	  ((t_data *)keepmem())->elem = ((t_data *)keepmem())->elem->prev;
+	  ((t_data *)keepmem())->cy--;
 	}
 	else
 	{
-		elem = ptrto_last(elem);
-		ws->cy = ws->y;
+	  ((t_data *)keepmem())->elem = ptrto_last(((t_data *)keepmem())->elem);
+	  ((t_data *)keepmem())->cy = ((t_data *)keepmem())->y;
 	}
-	tputs(tgoto(tgetstr("cm", NULL), ws->cx, ws->cy), 1, tc_out);
-	cursor(elem, ws, 1);
-	return (elem);
+	tputs(tgoto(tgetstr("cm", NULL), ((t_data *)keepmem())->cx, ((t_data *)keepmem())->cy), 1, tc_out);
+	cursor(1);
 }
 
-t_list			*evkey_arrow(char *buff, t_data *ws, t_list *elem)
+unsigned char			evkey_arrow(char *buff)
 {
-	int			key;
+	signed char	       	key;
 
 	key = 0;
-	if ((int)buff[1] == 0)
-		return (NULL);
-	else if ((int)buff[1] == 91 && (int)buff[2])
+	if ((signed char)buff[1] && (signed char)buff[2])
 	{
-		key = (int)buff[2];
+		key = (signed char)buff[2];
 		if (key == 65 || key == 67)
-			elem = up(ws, elem);
+		  up();
 		else if (key == 66 || key == 68)
-			elem = down(ws, elem);
-		else if (key == 51 && (elem = evkey_delete(ws, elem)) == NULL)
-			return (NULL);
+		  down();
+		else if (key == 51 && !evkey_delete())
+			return (0);
 		else if (key == 70)
 		{
-			ws->cy = ws->y;
-			cursor(elem, ws, 0);
-			elem = ptrto_last(elem);
-			cursor(elem, ws, 1);
+		  ((t_data *)keepmem())->cy = ((t_data *)keepmem())->y;
+			cursor(0);
+			((t_data *)keepmem())->elem = ptrto_last(((t_data *)keepmem())->elem);
+			cursor(1);
 		}
 		else if (key == 72)
 		{
-			ws->cy = 0;
-			cursor(elem, ws, 0);
-			elem = ptrto_frst(elem);
-			cursor(elem, ws, 1);
+		  ((t_data *)keepmem())->cy = 0;
+			cursor(0);
+			((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
+			cursor(1);
 		}
-		else
-			return (elem);
-		return (elem);
+		return (1);
 	}
-	return (NULL);
+	  return (0);
 }

@@ -41,30 +41,30 @@ t_list				*relinker(t_list *elem)
 	return (elem);
 }
 
-t_list				*evkey_delete(t_data *ws, t_list *elem)
+unsigned char		    evkey_delete()
 {
 	unsigned int	flag;
 
 	flag = 0;
-	ws->cur = elem;
-	elem = ptrto_frst(elem);
-	while (elem->next)
-		if (elem->select == 1 && ++flag)
+	((t_data *)keepmem())->cur = ((t_data *)keepmem())->elem;
+	((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
+	while (((t_data *)keepmem())->elem->next)
+	  if (((t_data *)keepmem())->elem->select == 1 && ++flag)
 		{
-			if ((elem = relinker(elem)) == NULL)
-				return (NULL);
-			ws->y--;
+		  if ((((t_data *)keepmem())->elem = relinker(((t_data *)keepmem())->elem)) == NULL)
+				return (0);
+		  ((t_data *)keepmem())->y--;
 		}
 		else
-			elem = elem->next;
-	if (elem->select == 1 && ++flag)
-		if ((elem = relinker(elem)) == NULL || --ws->y == -1)
-			return (NULL);
-	if (!flag && ((ws->cur = relinker(ws->cur)) == NULL || --ws->y == -1))
-		return (NULL);
-	ws->cy = 0;
-	init_select(elem, ws);
-	elem = ptrto_frst(elem);
-	cursor(elem, ws, 1);
-	return (elem);
+		  ((t_data *)keepmem())->elem = ((t_data *)keepmem())->elem->next;
+	if (((t_data *)keepmem())->elem->select == 1 && ++flag)
+	  if ((((t_data *)keepmem())->elem = relinker(((t_data *)keepmem())->elem)) == NULL || --((t_data *)keepmem())->y == -1)
+			return (0);
+	if (!flag && ((((t_data *)keepmem())->cur = relinker(((t_data *)keepmem())->cur)) == NULL || --((t_data *)keepmem())->y == -1))
+		return (0);
+	((t_data *)keepmem())->cy = 0;
+	init_select();
+	((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
+	cursor(1);
+	return (1);
 }

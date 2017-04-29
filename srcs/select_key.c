@@ -12,31 +12,29 @@
 
 #include "../includes/header.h"
 
-static t_list	*uon_line(t_list *elem, t_data *ws)
+void	uon_line()
 {
-	if (elem->select == 0)
+  if (((t_data *)keepmem())->elem->select == 0)
 	{
 		tputs(tgetstr("mr", NULL), 1, tc_out);
-		ft_putstr_fd(elem->content, ws->fd);
+		ft_putstr_fd(((t_data *)keepmem())->elem->content, ((t_data *)keepmem())->fd);
 		tputs(tgetstr("me", NULL), 1, tc_out);
-		elem->select = 1;
+		((t_data *)keepmem())->elem->select = 1;
 	}
 	else
 	{
-		elem->select = 0;
-		ft_putstr_fd(elem->content, ws->fd);
+	  ((t_data *)keepmem())->elem->select = 0;
+	  ft_putstr_fd(((t_data *)keepmem())->elem->content, ((t_data *)keepmem())->fd);
 	}
-	tputs(tgoto(tgetstr("cm", NULL), 0, ws->cy), 1, tc_out);
-	return (elem);
+  tputs(tgoto(tgetstr("cm", NULL), 0, ((t_data *)keepmem())->cy), 1, tc_out);
 }
 
-t_list			*evkey_select(char *buff, t_data *ws, t_list *elem)
+void			evkey_select(char *buff)
 {
 	if ((int)buff[1] == 0)
-		elem = uon_line(elem, ws);
+		uon_line();
 	else
-		return (elem);
-	elem = down(ws, elem);
-	cursor(elem, ws, 1);
-	return (elem);
+	  return ;
+	down();
+	cursor(1);
 }

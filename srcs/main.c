@@ -15,9 +15,10 @@
 // ====
 // == Partie Obligatoire ==
 // ==== [ToDo] ====
-// [KO]| Environnement vide
-// [KO]| Signaux (Redimension, Ctrl-z + fg, Ctrl-C avec fin des TC)
-// [KO]| Renvoyer correctement le retour-selection
+// [KO]| Environnement vide (Pour le moment aucun comportement...)
+// [90% - OK - OK]| Signaux (Redimension, Ctrl-z + fg, Ctrl-C avec fin des TC)
+// Redimension : S'adapter par rapport à la taille de la fenêtre
+// [KO]| Renvoyer correctement le retour-selection (exec simple de la cmd)
 // ====
 // == Partie Bonus ==
 // ====
@@ -29,17 +30,6 @@
 // ====
 // ==== [ft_select - 85 % ] ====
 // Notes :
-//((t_list *)keep_my_memory())->arg = arg;
-//((t_list *)keep_my_memory())->term = term;
-//    STATIC ID
-//  void			*keep_my_memory(void)
-//  {
-//	static t_list	*list = NULL;
-//
-//	if (list == NULL)
-//		list = (t_list *)malloc(sizeof(*list));
-//	return (inst);
-//  }
 //
 // ====
 
@@ -54,7 +44,7 @@ int					tc_out(int c)
 	}
 	ft_putchar_fd((char)c, fd);
 	close(fd);
-	return (0);
+	return (1);
 }
 
 void			tc_end(struct termios *term)
@@ -67,7 +57,7 @@ void			tc_end(struct termios *term)
 	tputs(tgetstr("ve", NULL), 1, tc_out);
 }
 
-int					ws_init(t_data *wsize, unsigned int n)
+unsigned char					ws_init(unsigned int n)
 {
 	struct winsize	w;
 
@@ -75,14 +65,14 @@ int					ws_init(t_data *wsize, unsigned int n)
 	//if ((wsize->y = (int)w.ws_col) n)
 	//if ((wsize->x = (int)w.ws_row) < 0)
 	//	return (0);
-	wsize->y = n - 1;
-	wsize->x = 0;
-	wsize->cx = 0;
-	wsize->cy = 0;
+	((t_data *)keepmem())->y = n - 1;
+	((t_data *)keepmem())->x = 0;
+	((t_data *)keepmem())->cx = 0;
+	((t_data *)keepmem())->cy = 0;
 	return (1);
 }
 
-int			tc_init(struct termios *term)
+unsigned char			tc_init(struct termios *term)
 {
 	char			buff[128];
 
@@ -105,14 +95,13 @@ int					main(int ac, char **av, char **envp)
 	if (ac == 1)
 		return (0);
 	env_init(envp);
-	if (!tc_init(&term) ||
-		!ws_init(((t_data *)keepmem()), (unsigned int)(ac - 1)))
+	if (!tc_init(&term) || !ws_init((unsigned int)(ac - 1)))
 		return (-1);
 	((t_data *)keepmem())->term = &term;
 	((t_data *)keepmem())->lst = lst_creator(av, ac);
 	if ((((t_data *)keepmem())->fd = open("/dev/tty", O_RDWR)) == -1)
 		return (-1);
-	ft_select((t_data *)keepmem());
+	ft_select();
 	close(((t_data *)keepmem)->fd);
 	tc_end(&term);
 	return (0);

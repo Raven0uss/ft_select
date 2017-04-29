@@ -12,31 +12,30 @@
 
 #include "../includes/header.h"
 
-static char	*ret_select(t_list *elem)
+static void	ret_select()
 {
-	int		flag;
+	signed char		flag;
 
 	flag = 0;
-	elem = ptrto_frst(elem);
-	while (elem->next)
+	((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
+	while (((t_data *)keepmem())->elem->next)
     {
-		if (elem->select == 1 && ++flag)
+      if (((t_data *)keepmem())->elem->select == 1 && ++flag)
 		{
 			if (flag > 1)
 				ft_putchar_fd(' ', 1);
-			ft_putstr_fd(elem->content, 1);
+			ft_putstr_fd(((t_data *)keepmem())->elem->content, 1);
 		}
-		elem = elem->next;
+      ((t_data *)keepmem())->elem = ((t_data *)keepmem())->elem->next;
     }
-	if (elem->select == 1 && ++flag)
+	if (((t_data *)keepmem())->elem->select == 1 && ++flag)
     {
 		if (flag > 1)
 			ft_putchar_fd(' ', 1);
-		ft_putstr_fd(elem->content, 1);
+		ft_putstr_fd(((t_data *)keepmem())->elem->content, 1);
     }
 	if (flag)
 		ft_putchar_fd('\n', 1);
-	return (NULL);
 }
 
 void		aff_tc(char *buff)
@@ -49,73 +48,70 @@ void		aff_tc(char *buff)
 	ft_putchar('\n');
 }
 
-void		init_select(t_list *elem, t_data *ws)
+void		init_select()
 {
 	tputs(tgetstr("cl", NULL), 1, tc_out);
 	tputs(tgetstr("vi", NULL), 1, tc_out);
 	tputs(tgetstr("ms", NULL), 1, tc_out);
-	ft_aff_lst(elem, ws);
+	((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
+	ft_aff_lst(((t_data *)keepmem())->elem);
 	tputs(tgetstr("ho", NULL), 1, tc_out);
 }
 
-void		cursor(t_list *elem, t_data *ws, unsigned char mode)
+void		cursor(unsigned char mode)
 {
 		if (mode)
 		{
 			tputs(tgetstr("us", NULL), 1, tc_out);
-			if (elem->select)
+			if (((t_data *)keepmem())->elem->select)
 			{
 				tputs(tgetstr("mr", NULL), 1, tc_out);
-				ft_putstr_fd(elem->content, ws->fd);
+				ft_putstr_fd(((t_data *)keepmem())->elem->content, ((t_data *)keepmem())->fd);
 				tputs(tgetstr("me", NULL), 1, tc_out);
 			}
 			else
-				ft_putstr_fd(elem->content, ws->fd);
+			  ft_putstr_fd(((t_data *)keepmem())->elem->content, ((t_data *)keepmem())->fd);
 			tputs(tgetstr("ue", NULL), 1, tc_out);
 		}
 		else
 		{
-			if (elem->select)
+		  if (((t_data *)keepmem())->elem->select)
 			{
 				tputs(tgetstr("mr", NULL), 1, tc_out);
-				ft_putstr_fd(elem->content, ws->fd);
+				ft_putstr_fd(((t_data *)keepmem())->elem->content, ((t_data *)keepmem())->fd);
 				tputs(tgetstr("me", NULL), 1, tc_out);
 			}
 			else
-				ft_putstr_fd(elem->content, ws->fd);
+			  ft_putstr_fd(((t_data *)keepmem())->elem->content, ((t_data *)keepmem())->fd);
 		}
-	tputs(tgoto(tgetstr("cm", NULL), 0, ws->cy), 1, tc_out);
+		tputs(tgoto(tgetstr("cm", NULL), 0, ((t_data *)keepmem())->cy), 1, tc_out);
 }
 
-char		*ft_select(t_data *ws)
+void		ft_select()
 {
-	t_list	*elem;
 	char	*buff;
 
 	buff = ft_strnew(3);
-	elem = ws->lst;
-	init_select(elem, ws);
-	cursor(elem, ws, 1);
+	((t_data *)keepmem())->elem = ((t_data *)keepmem())->lst;
+	init_select();
+	cursor(1);
 	while ((int)buff[0] != 10 && (int)buff[0] != 4)
 	{
-		ws = ((t_data *)keepmem());
 		sigft();
 		ft_bzero((void *)buff, sizeof(buff));
 		read(0, buff, 3);
 		//aff_tc(buff);
-		if ((int)buff[0] == 27)
-			if ((elem = evkey_arrow(buff, ws, elem)) == NULL)
+		if ((int)buff[0] == 27 && !evkey_arrow(buff))
 				break ;
-		if ((int)buff[0] == 32) //Space
-			if ((elem = evkey_select(buff, ws, elem)) == NULL)
-				break ;
-		if ((int)buff[0] == 127) //Backspace
-		  if ((elem = evkey_delete(ws, elem)) == NULL)
+		if ((int)buff[0] == 32)
+		  evkey_select(buff);
+		if ((int)buff[0] == 127 && !evkey_delete())
 				break ;
 		if ((int)buff[0] == 13)
-			if (ret_select(elem) == NULL)
-				break ;//Enter
+		  {
+			ret_select();
+			break ;
+		  }
 	}
 	free(buff);
-	return (NULL);
 }

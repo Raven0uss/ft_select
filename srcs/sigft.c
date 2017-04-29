@@ -14,16 +14,23 @@
 
 static void			sigrwft(int sig)
 {
+  struct winsize		win;
+
 	(void)sig;
-	tputs(tgetstr("me", NULL), 1, tc_out);
 	tputs(tgetstr("cl", NULL), 1, tc_out);
+	ws_init((unsigned int)((t_data *)keepmem())->y + 1);
+        init_select();
+	((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
+        cursor(1);
 }
 
 static void			sigfgft(int sig)
 {
 	(void)sig;
-	tputs(tgetstr("me", NULL), 1, tc_out);
-	tputs(tgetstr("cl", NULL), 1, tc_out);
+	tc_init(((t_data *)keepmem())->term);
+	ws_init((unsigned int)(((t_data *)keepmem())->y + 1));
+	init_select();
+	cursor(1);
 }
 
 static void			sigzft(int sig)
@@ -35,19 +42,18 @@ static void			sigzft(int sig)
 	{
 		z[0] = ((t_data *)keepmem())->term->c_cc[VSUSP];
 		z[1] = 0;
-		tputs(tgetstr("te", NULL), 1, tc_out);
-		tputs(tgetstr("me", NULL), 1, tc_out);
 		tputs(tgetstr("cl", NULL), 1, tc_out);
 		signal(SIGTSTP, SIG_DFL);
 		ioctl(0, TIOCSTI, z);
+		tc_end(((t_data *)keepmem())->term);
 	}
 }
 
 static void			sigcft(int sig)
 {
 	(void)sig;
-	tputs(tgetstr("me", NULL), 1, tc_out);
-	tputs(tgetstr("cl", NULL), 1, tc_out);
+	tc_end(((t_data *)keepmem())->term);
+	exit(0);
 }
 
 void				sigft()

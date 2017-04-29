@@ -26,20 +26,32 @@ t_list				*ptrto_last(t_list *elem)
   return (elem);
 }
 
-void				ft_aff_lst(t_list *lst, t_data *ws)
+void				ft_aff_lst(t_list *lst)
 {
-	t_list			*tmp;
+  t_list			*tmp;
 
-	tmp = lst;
-	tmp = ptrto_frst(tmp);
-	while (tmp->next != NULL)
+  tmp = lst;
+  tmp = ptrto_frst(tmp);
+  while (tmp->next != NULL)
+    {
+      if (tmp->content != NULL)
 	{
-		if (tmp->content != NULL)
-			ft_putendl_fd(tmp->content, ws->fd);
-		tmp = tmp->next;
+	  if (tmp->select)
+	    tputs(tgetstr("mr", NULL), 1, tc_out);
+	  ft_putendl_fd(tmp->content, ((t_data *)keepmem())->fd);
+	  if (tmp->select)
+	    tputs(tgetstr("me", NULL), 1, tc_out);
 	}
-	if (tmp->content != NULL)
-		ft_putendl_fd(tmp->content, ws->fd);
+      tmp = tmp->next;
+    }
+  if (tmp->content != NULL)
+    {
+      if (tmp->select)
+	tputs(tgetstr("mr", NULL), 1, tc_out);
+      ft_putendl_fd(tmp->content, ((t_data *)keepmem())->fd);
+      if (tmp->select)
+	tputs(tgetstr("me", NULL), 1, tc_out);
+    }
 }
 
 t_list				*lst_creator(char **av, int ac)
