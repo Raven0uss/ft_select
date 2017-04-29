@@ -62,11 +62,9 @@ unsigned char					ws_init(unsigned int n)
 	struct winsize	w;
 
 	ioctl(0, TIOCGWINSZ, &w);
-	//if ((wsize->y = (int)w.ws_col) n)
-	//if ((wsize->x = (int)w.ws_row) < 0)
-	//	return (0);
 	((t_data *)keepmem())->y = n - 1;
-	((t_data *)keepmem())->x = 0;
+	((t_data *)keepmem())->wx = (unsigned int)w.ws_col;
+	((t_data *)keepmem())->wy = (unsigned int)w.ws_col;
 	((t_data *)keepmem())->cx = 0;
 	((t_data *)keepmem())->cy = 0;
 	return (1);

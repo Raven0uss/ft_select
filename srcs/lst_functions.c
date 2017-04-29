@@ -26,12 +26,31 @@ t_list				*ptrto_last(t_list *elem)
   return (elem);
 }
 
+void				fill_lencol()
+{
+  t_list		*tmp;
+
+  ((t_data *)keepmem())->lencol = 0;
+  tmp = ((t_data *)keepmem())->lst;
+  tmp = ptrto_frst(tmp);
+  while (tmp->next)
+    {
+      if (((t_data *)keepmem())->lencol < (unsigned int)ft_strlen(tmp->content))
+	((t_data *)keepmem())->lencol = (unsigned int)ft_strlen(tmp->content);
+      tmp = tmp->next;
+    }
+  if (tmp->content && ((t_data *)keepmem())->lencol < (unsigned int)ft_strlen(tmp->content))
+    ((t_data *)keepmem())->lencol = (unsigned int)ft_strlen(tmp->content);
+  ((t_data *)keepmem())->lencol += 2;
+}
+
 void				ft_aff_lst(t_list *lst)
 {
   t_list			*tmp;
-
+  
   tmp = lst;
   tmp = ptrto_frst(tmp);
+  fill_lencol();
   while (tmp->next != NULL)
     {
       if (tmp->content != NULL)

@@ -23,14 +23,17 @@
 typedef struct		s_data
 {
 	int				fd;
-	int				x;
+	unsigned int				wx;
+  unsigned int				wy;
 	int				y;
 	int				cx;
 	int				cy;
+  unsigned int		lencol;
 	t_list			*cur;
 	t_list			*lst;
 	 t_list			*elem;
-	struct termios	*term;
+  struct winsize	*w;
+  struct termios	*term;
 }					t_data;
 
 void				sigft();
@@ -52,6 +55,7 @@ void				*keepmem(void);
 void				tc_end(struct termios *term);
 unsigned char				tc_init(struct termios *term);
 unsigned char				ws_init(unsigned int n);
+void				fill_lencol();
 
 #endif
 
