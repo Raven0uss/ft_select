@@ -28,6 +28,8 @@ typedef struct		s_data
 	int				y;
 	int				cx;
 	int				cy;
+  unsigned int		nb_col;
+  unsigned int		ylast;
 	unsigned int		lencol;
 	t_list			*cur;
 	t_list			*lst;

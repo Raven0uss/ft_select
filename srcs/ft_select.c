@@ -84,7 +84,7 @@ void		cursor(unsigned char mode)
 			else
 			  ft_putstr_fd(((t_data *)keepmem())->elem->content, ((t_data *)keepmem())->fd);
 		}
-		tputs(tgoto(tgetstr("cm", NULL), 0, ((t_data *)keepmem())->cy), 1, tc_out);
+		tputs(tgoto(tgetstr("cm", NULL), ((t_data *)keepmem())->cx, ((t_data *)keepmem())->cy), 1, tc_out);
 }
 
 void		ft_select()

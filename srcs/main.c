@@ -28,7 +28,7 @@
 // 4 [KO]- Interface
 // 5 [KO]- Recherche Dynamique
 // ====
-// ==== [ft_select - 85 % ] ====
+// ==== [ft_select - 90 % ] ====
 // Notes :
 // 
 // ====

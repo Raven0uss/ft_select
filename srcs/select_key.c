@@ -26,7 +26,7 @@ void	uon_line()
 	  ((t_data *)keepmem())->elem->select = 0;
 	  ft_putstr_fd(((t_data *)keepmem())->elem->content, ((t_data *)keepmem())->fd);
 	}
-  tputs(tgoto(tgetstr("cm", NULL), 0, ((t_data *)keepmem())->cy), 1, tc_out);
+  tputs(tgoto(tgetstr("cm", NULL), ((t_data *)keepmem())->cx, ((t_data *)keepmem())->cy), 1, tc_out);
 }
 
 void			evkey_select(char *buff)

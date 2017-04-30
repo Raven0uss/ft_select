@@ -54,12 +54,14 @@ void				ft_aff_lst(t_list *lst)
   fill_lencol();
   padd = 0;
   ((t_data *)keepmem())->cy = 1;
+  ((t_data *)keepmem())->nb_col = 0;
   while (tmp->next != NULL)
     {
       if ((unsigned int)((t_data *)keepmem())->cy == ((t_data *)keepmem())->wy - 1)
 	{
 	  ((t_data *)keepmem())->cy = 0;
-	  padd += ((t_data *)keepmem())->lencol; 
+	  padd += ((t_data *)keepmem())->lencol;
+	  ((t_data *)keepmem())->nb_col++;
 	}
       if (tmp->content != NULL)
 	{
@@ -82,6 +84,7 @@ void				ft_aff_lst(t_list *lst)
 	tputs(tgetstr("me", NULL), 1, tc_out);
     }
   ((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
+  ((t_data *)keepmem())->ylast = ((t_data *)keepmem())->cy;
   ((t_data *)keepmem())->cy = 0;
 }
 
