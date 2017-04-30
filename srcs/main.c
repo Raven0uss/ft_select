@@ -14,9 +14,7 @@
 
 // ====
 // == Partie Obligatoire ==
-// ==== [ToDo] ====
-// [??]| Environnement vide (Pour le moment aucun comportement...)
-// ====
+// ==== [OK]
 // == Partie Bonus ==
 // ====
 // 1 [OK]- HOME et END, Debut et fin de liste
@@ -25,7 +23,7 @@
 // 4 [KO]- Interface
 // 5 [KO]- Recherche Dynamique
 // ====
-// ==== [ft_select - 99% - 40% ] ====
+// ==== [ft_select - 100% - 40% ] ====
 // Notes :
 // 
 // ====
