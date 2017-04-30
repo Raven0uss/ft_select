@@ -16,9 +16,6 @@
 // == Partie Obligatoire ==
 // ==== [ToDo] ====
 // [??]| Environnement vide (Pour le moment aucun comportement...)
-// [97% - OK - OK]| Signaux (Redimension, Ctrl-z + fg, Ctrl-C avec fin des TC)
-// Redimension : REVOIR LA GESTION DES FLECHES POUR MULTI COL
-// [KO]| Renvoyer correctement le retour-selection (exec simple de la cmd)
 // ====
 // == Partie Bonus ==
 // ====
@@ -28,7 +25,7 @@
 // 4 [KO]- Interface
 // 5 [KO]- Recherche Dynamique
 // ====
-// ==== [ft_select - 90 % ] ====
+// ==== [ft_select - 99% - 40% ] ====
 // Notes :
 // 
 // ====

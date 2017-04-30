@@ -14,8 +14,6 @@
 
 static void			sigrwft(int sig)
 {
-  struct winsize		win;
-
 	(void)sig;
 	tputs(tgetstr("cl", NULL), 1, tc_out);
 	ws_init((unsigned int)((t_data *)keepmem())->y + 1);

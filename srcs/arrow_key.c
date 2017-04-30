@@ -73,13 +73,14 @@ unsigned char			evkey_arrow(char *buff)
 	if ((signed char)buff[1] && (signed char)buff[2])
 	{
 		key = (signed char)buff[2];
-		key == 65 || key == 67 ? up() : (void)key;
-		key == 66 || key == 68 ? down() : (void)key;
+		key == 65 || key == 68 ? up() : (void)key;
+		key == 66 || key == 67 ? down() : (void)key;
 		if (key == 51 && !evkey_delete())
 			return (0);
 		else if (key == 70)
 		{
-		  ((t_data *)keepmem())->cy = ((t_data *)keepmem())->y;
+		  ((t_data *)keepmem())->cy = ((t_data *)keepmem())->ylast - 1;
+		  ((t_data *)keepmem())->cx = ((t_data *)keepmem())->lencol * ((t_data *)keepmem())->nb_col;
 			cursor(0);
 			((t_data *)keepmem())->elem = ptrto_last(((t_data *)keepmem())->elem);
 			cursor(1);
@@ -87,6 +88,7 @@ unsigned char			evkey_arrow(char *buff)
 		else if (key == 72)
 		{
 		  ((t_data *)keepmem())->cy = 0;
+		  ((t_data *)keepmem())->cx = 0;
 			cursor(0);
 			((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
 			cursor(1);

@@ -20,22 +20,24 @@ static void	ret_select()
 	((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
 	while (((t_data *)keepmem())->elem->next)
     {
-      if (((t_data *)keepmem())->elem->select == 1 && ++flag)
+      if (((t_data *)keepmem())->elem->select == 1)
 		{
-			if (flag > 1)
+			if (flag > 0)
 				ft_putchar_fd(' ', 1);
-			ft_putstr_fd(((t_data *)keepmem())->elem->content, 1);
+			ft_putstr(((t_data *)keepmem())->elem->content);
+			flag = 1;
 		}
       ((t_data *)keepmem())->elem = ((t_data *)keepmem())->elem->next;
     }
-	if (((t_data *)keepmem())->elem->select == 1 && ++flag)
+	if (((t_data *)keepmem())->elem->select == 1)
     {
-		if (flag > 1)
+		if (flag > 0)
 			ft_putchar_fd(' ', 1);
-		ft_putstr_fd(((t_data *)keepmem())->elem->content, 1);
+		ft_putstr(((t_data *)keepmem())->elem->content);
+		flag = 1;
     }
 	if (flag)
-		ft_putchar_fd('\n', 1);
+	  ft_putchar('\n');
 }
 
 void		aff_tc(char *buff)
@@ -95,7 +97,7 @@ void		ft_select()
 	((t_data *)keepmem())->elem = ((t_data *)keepmem())->lst;
 	init_select();
 	cursor(1);
-	while ((int)buff[0] != 10 && (int)buff[0] != 4)
+	while ((int)buff[0] != 13 && (int)buff[0] != 4)
 	{
 		sigft();
 		ft_bzero((void *)buff, sizeof(buff));
@@ -107,7 +109,7 @@ void		ft_select()
 		  evkey_select(buff);
 		if ((int)buff[0] == 127 && !evkey_delete())
 				break ;
-		if ((int)buff[0] == 13)
+		if ((int)buff[0] == 10)
 		  {
 			ret_select();
 			break ;
