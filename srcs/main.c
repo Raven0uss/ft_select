@@ -15,9 +15,9 @@
 // ====
 // == Partie Obligatoire ==
 // ==== [ToDo] ====
-// [KO]| Environnement vide (Pour le moment aucun comportement...)
-// [90% - OK - OK]| Signaux (Redimension, Ctrl-z + fg, Ctrl-C avec fin des TC)
-// Redimension : S'adapter par rapport à la taille de la fenêtre, decouper l affichage en colonne
+// [??]| Environnement vide (Pour le moment aucun comportement...)
+// [97% - OK - OK]| Signaux (Redimension, Ctrl-z + fg, Ctrl-C avec fin des TC)
+// Redimension : REVOIR LA GESTION DES FLECHES POUR MULTI COL
 // [KO]| Renvoyer correctement le retour-selection (exec simple de la cmd)
 // ====
 // == Partie Bonus ==
@@ -30,7 +30,7 @@
 // ====
 // ==== [ft_select - 85 % ] ====
 // Notes :
-// struct winsize w ; w.ws_col && w.ws_row
+// 
 // ====
 
 int					tc_out(int c)
@@ -64,7 +64,7 @@ unsigned char					ws_init(unsigned int n)
 	ioctl(0, TIOCGWINSZ, &w);
 	((t_data *)keepmem())->y = n - 1;
 	((t_data *)keepmem())->wx = (unsigned int)w.ws_col;
-	((t_data *)keepmem())->wy = (unsigned int)w.ws_col;
+	((t_data *)keepmem())->wy = (unsigned int)w.ws_row;
 	((t_data *)keepmem())->cx = 0;
 	((t_data *)keepmem())->cy = 0;
 	return (1);
@@ -92,7 +92,6 @@ int					main(int ac, char **av, char **envp)
 
 	if (ac == 1)
 		return (0);
-	env_init(envp);
 	if (!tc_init(&term) || !ws_init((unsigned int)(ac - 1)))
 		return (-1);
 	((t_data *)keepmem())->term = &term;

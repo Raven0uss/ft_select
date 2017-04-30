@@ -47,12 +47,20 @@ void				fill_lencol()
 void				ft_aff_lst(t_list *lst)
 {
   t_list			*tmp;
+  unsigned int			padd;
   
   tmp = lst;
   tmp = ptrto_frst(tmp);
   fill_lencol();
+  padd = 0;
+  ((t_data *)keepmem())->cy = 1;
   while (tmp->next != NULL)
     {
+      if ((unsigned int)((t_data *)keepmem())->cy == ((t_data *)keepmem())->wy - 1)
+	{
+	  ((t_data *)keepmem())->cy = 0;
+	  padd += ((t_data *)keepmem())->lencol; 
+	}
       if (tmp->content != NULL)
 	{
 	  if (tmp->select)
@@ -61,6 +69,8 @@ void				ft_aff_lst(t_list *lst)
 	  if (tmp->select)
 	    tputs(tgetstr("me", NULL), 1, tc_out);
 	}
+      tputs(tgoto(tgetstr("cm", NULL), padd, ((t_data *)keepmem())->cy), 1, tc_out);
+      ((t_data *)keepmem())->cy++;
       tmp = tmp->next;
     }
   if (tmp->content != NULL)
@@ -71,6 +81,8 @@ void				ft_aff_lst(t_list *lst)
       if (tmp->select)
 	tputs(tgetstr("me", NULL), 1, tc_out);
     }
+  ((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
+  ((t_data *)keepmem())->cy = 0;
 }
 
 t_list				*lst_creator(char **av, int ac)

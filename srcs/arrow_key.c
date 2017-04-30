@@ -50,15 +50,12 @@ unsigned char			evkey_arrow(char *buff)
 {
 	signed char	       	key;
 
-	key = 0;
 	if ((signed char)buff[1] && (signed char)buff[2])
 	{
 		key = (signed char)buff[2];
-		if (key == 65 || key == 67)
-		  up();
-		else if (key == 66 || key == 68)
-		  down();
-		else if (key == 51 && !evkey_delete())
+		key == 65 || key == 67 ? up() : (void)key;
+		key == 66 || key == 68 ? down() : (void)key;
+		if (key == 51 && !evkey_delete())
 			return (0);
 		else if (key == 70)
 		{

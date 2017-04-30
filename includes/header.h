@@ -24,15 +24,14 @@ typedef struct		s_data
 {
 	int				fd;
 	unsigned int				wx;
-  unsigned int				wy;
+	unsigned int				wy;
 	int				y;
 	int				cx;
 	int				cy;
-  unsigned int		lencol;
+	unsigned int		lencol;
 	t_list			*cur;
 	t_list			*lst;
 	 t_list			*elem;
-  struct winsize	*w;
   struct termios	*term;
 }					t_data;
 
@@ -50,7 +49,6 @@ void				init_select();
 void				down();
 void				up();
 void				cursor(unsigned char mode);
-void				env_init(char **envp);
 void				*keepmem(void);
 void				tc_end(struct termios *term);
 unsigned char				tc_init(struct termios *term);
