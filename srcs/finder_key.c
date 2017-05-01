@@ -14,16 +14,8 @@
 
 void		evkey_finder(char *buff)
 {
-  t_list	*stephencurry;
-  t_list	*mem;
-  int		ky;
-  int		kx;
   char		*str;
   
-  stephencurry = ((t_data *)keepmem())->elem;
-  mem = stephencurry;
-  kx = ((t_data *)keepmem())->cx;
-  ky = ((t_data *)keepmem())->cy;
   tputs(tgoto(tgetstr("cm", NULL), 0, 0), 1, tc_out);
   ft_aff_lst(((t_data *)keepmem())->elem);
   tputs(tgoto(tgetstr("cm", NULL), 0, ((t_data *)keepmem())->wy), 1, tc_out);
