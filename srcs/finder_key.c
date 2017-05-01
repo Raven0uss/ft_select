@@ -27,7 +27,7 @@ void		evkey_finder(char *buff)
   ((t_data *)keepmem())->term->c_lflag |= ICANON;
   ((t_data *)keepmem())->term->c_lflag |= ECHO;
   tcsetattr(0, 0, ((t_data *)keepmem())->term);
-  get_next_line(((t_data *)keepmem())->fd, &str);
+  get_next_line(((t_data *)keepmem())->fd, &str) == -1 ? exit(-1) : (void)str;
   tc_init(((t_data *)keepmem())->term);
   tputs(tgetstr("cl", NULL), 1, tc_out);
   ft_aff_lst(((t_data *)keepmem())->elem);
