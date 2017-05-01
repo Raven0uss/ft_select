@@ -14,16 +14,19 @@
 
 // ====
 // == Partie Obligatoire ==
-// ==== [OK]
+// ==== [100%]
 // == Partie Bonus ==
 // ====
-// 1 [OK]- HOME et END, Debut et fin de liste
-// 2 [OK]- Selection + suppression multiple
-// 3 [KO]- Navigation gauche droite lorsque terminal trop petit
-// 4 [KO]- Interface
-// 5 [KO]- Recherche Dynamique
+// 1 [100%]- HOME/END, DEBUT/FIN DE LISTE
+// 2 [100%]- SELECTION SUPPRESSION MULTIPLE
+// 3 [0%]- NAVIGATION GAUCHE DROITE LORSQUE TERMINAL TROP PETIT
+// 4 [0%]- INTERFACE
+// 5 [50%]- RECHERCHE DYNAMIQUE
+//    -100%- MISE EN PLACE DE LA BARRE DE RECHERCHE
+//    -50%- GESTION DES SIGNAUX + STAB DU TERM POUR LE FINDER
+//    -0%- TROUVER L'OCCURENCE OU NON + POINTEUR POINTE SUR L'OCCURENCE + CURSEUR
 // ====
-// ==== [ft_select - 100% - 40% ] ====
+// ==== [ft_select - 100% - 50% ] ====
 // Notes :
 // 
 // ====

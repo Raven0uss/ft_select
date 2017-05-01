@@ -56,6 +56,7 @@ void				tc_end(struct termios *term);
 unsigned char				tc_init(struct termios *term);
 unsigned char				ws_init(unsigned int n);
 void				fill_lencol();
+void				evkey_finder(char *buff);
 
 #endif
 

@@ -107,6 +107,8 @@ void		ft_select()
 				break ;
 		if ((int)buff[0] == 32)
 		  evkey_select(buff);
+		if ((int)buff[0] == 102)
+		  evkey_finder(buff);
 		if ((int)buff[0] == 127 && !evkey_delete())
 				break ;
 		if ((int)buff[0] == 10)
