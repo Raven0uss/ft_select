@@ -14,8 +14,14 @@
 
 void		evkey_finder(char *buff)
 {
+  t_list	*tmp;
+  int		kx;
+  int		ky;
   char		*str;
-  
+
+  kx =  ((t_data *)keepmem())->cx;
+  ky =  ((t_data *)keepmem())->cy;
+  tmp =  ((t_data *)keepmem())->elem;
   tputs(tgoto(tgetstr("cm", NULL), 0, 0), 1, tc_out);
   ft_aff_lst(((t_data *)keepmem())->elem);
   tputs(tgoto(tgetstr("cm", NULL), 0, ((t_data *)keepmem())->wy), 1, tc_out);
@@ -32,7 +38,10 @@ void		evkey_finder(char *buff)
   tputs(tgetstr("cl", NULL), 1, tc_out);
   ft_aff_lst(((t_data *)keepmem())->elem);
   tputs(tgetstr("vi", NULL), 1, tc_out);
-  ((t_data *)keepmem())->cx = 0;
+  ((t_data *)keepmem())->cx = kx;
+  ((t_data *)keepmem())->cy = ky;
+  ((t_data *)keepmem())->elem = tmp;
   tputs(tgoto(tgetstr("cm", NULL), ((t_data *)keepmem())->cx, ((t_data *)keepmem())->cy), 1, tc_out);
   cursor(1);
+  free(str);
 }
