@@ -6,28 +6,28 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 12:48:17 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/28 17:39:51 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/05/03 17:59:11 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-static void	ret_select()
+static void		ret_select()
 {
-	signed char		flag;
+	signed char	flag;
 
 	flag = 0;
 	((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
 	while (((t_data *)keepmem())->elem->next)
     {
-      if (((t_data *)keepmem())->elem->select == 1)
+		if (((t_data *)keepmem())->elem->select == 1)
 		{
 			if (flag > 0)
 				ft_putchar_fd(' ', 1);
 			ft_putstr(((t_data *)keepmem())->elem->content);
 			flag = 1;
 		}
-      ((t_data *)keepmem())->elem = ((t_data *)keepmem())->elem->next;
+		((t_data *)keepmem())->elem = ((t_data *)keepmem())->elem->next;
     }
 	if (((t_data *)keepmem())->elem->select == 1)
     {
@@ -37,10 +37,10 @@ static void	ret_select()
 		flag = 1;
     }
 	if (flag)
-	  ft_putchar('\n');
+		ft_putchar('\n');
 }
 
-void		aff_tc(char *buff)
+void			aff_tc(char *buff)
 {
 	ft_putnbr((int)buff[0]);
 	ft_putchar(' ');
@@ -50,7 +50,7 @@ void		aff_tc(char *buff)
 	ft_putchar('\n');
 }
 
-void		init_select()
+void			init_select()
 {
 	tputs(tgetstr("cl", NULL), 1, tc_out);
 	tputs(tgetstr("vi", NULL), 1, tc_out);
@@ -60,38 +60,40 @@ void		init_select()
 	tputs(tgetstr("ho", NULL), 1, tc_out);
 }
 
-void		cursor(unsigned char mode)
+void			cursor(unsigned char mode)
 {
-		if (mode)
+	if (mode)
+	{
+		tputs(tgetstr("us", NULL), 1, tc_out);
+		if (((t_data *)keepmem())->elem->select)
 		{
-			tputs(tgetstr("us", NULL), 1, tc_out);
-			if (((t_data *)keepmem())->elem->select)
-			{
-				tputs(tgetstr("mr", NULL), 1, tc_out);
-				ft_putstr_fd(((t_data *)keepmem())->elem->content, ((t_data *)keepmem())->fd);
-				tputs(tgetstr("me", NULL), 1, tc_out);
-			}
-			else
-			  ft_putstr_fd(((t_data *)keepmem())->elem->content, ((t_data *)keepmem())->fd);
-			tputs(tgetstr("ue", NULL), 1, tc_out);
+			tputs(tgetstr("mr", NULL), 1, tc_out);
+			ft_putstr_fd(((t_data *)keepmem())->elem->content,
+						 ((t_data *)keepmem())->fd);
+			tputs(tgetstr("me", NULL), 1, tc_out);
 		}
 		else
-		{
-		  if (((t_data *)keepmem())->elem->select)
-			{
-				tputs(tgetstr("mr", NULL), 1, tc_out);
-				ft_putstr_fd(((t_data *)keepmem())->elem->content, ((t_data *)keepmem())->fd);
-				tputs(tgetstr("me", NULL), 1, tc_out);
-			}
-			else
-			  ft_putstr_fd(((t_data *)keepmem())->elem->content, ((t_data *)keepmem())->fd);
-		}
-		tputs(tgoto(tgetstr("cm", NULL), ((t_data *)keepmem())->cx, ((t_data *)keepmem())->cy), 1, tc_out);
+			ft_putstr_fd(((t_data *)keepmem())->elem->content,
+						 ((t_data *)keepmem())->fd);
+		tputs(tgetstr("ue", NULL), 1, tc_out);
+	}
+	else if (((t_data *)keepmem())->elem->select)
+	{
+		tputs(tgetstr("mr", NULL), 1, tc_out);
+		ft_putstr_fd(((t_data *)keepmem())->elem->content,
+					 ((t_data *)keepmem())->fd);
+		tputs(tgetstr("me", NULL), 1, tc_out);
+	}
+	else
+		ft_putstr_fd(((t_data *)keepmem())->elem->content,
+					 ((t_data *)keepmem())->fd);
+	tputs(tgoto(tgetstr("cm", NULL), ((t_data *)keepmem())->cx,
+				((t_data *)keepmem())->cy), 1, tc_out);
 }
 
-void		ft_select()
+void			ft_select()
 {
-	char	*buff;
+	char		*buff;
 
 	buff = ft_strnew(3);
 	((t_data *)keepmem())->elem = ((t_data *)keepmem())->lst;
@@ -104,18 +106,18 @@ void		ft_select()
 		read(0, buff, 3);
 		//aff_tc(buff);
 		if ((int)buff[0] == 27 && !evkey_arrow(buff))
-				break ;
+			break ;
 		if ((int)buff[0] == 32)
-		  evkey_select(buff);
+			evkey_select(buff);
 		if ((int)buff[0] == 102)
-		  evkey_finder(buff);
+			evkey_finder(buff);
 		if ((int)buff[0] == 127 && !evkey_delete())
-				break ;
+			break ;
 		if ((int)buff[0] == 10)
-		  {
+		{
 			ret_select();
 			break ;
-		  }
+		}
 	}
 	free(buff);
 }

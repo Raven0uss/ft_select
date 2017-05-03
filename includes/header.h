@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 20:16:53 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/28 17:41:30 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/05/03 17:32:27 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ typedef struct		s_data
   unsigned int		nb_col;
   unsigned int		ylast;
 	unsigned int		lencol;
+	unsigned int	kx;
+	unsigned int	ky;
+	t_list *tmp;
 	t_list			*cur;
 	t_list			*lst;
 	 t_list			*elem;

@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 20:03:20 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/03/13 21:03:52 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/05/03 15:50:24 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-# define BUFF_SIZE 512
+# define BUFF_SIZE 1000
 
 int			get_next_line(const int fd, char **line);
 

@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 10:57:31 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/28 17:41:23 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/05/03 17:55:38 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@
 // 2 [100%]- SELECTION SUPPRESSION MULTIPLE
 // 3 [0%]- NAVIGATION GAUCHE DROITE LORSQUE TERMINAL TROP PETIT
 // 4 [0%]- INTERFACE
-// 5 [50%]- RECHERCHE DYNAMIQUE
+// 5 [91%]- RECHERCHE DYNAMIQUE
 //    -100%- MISE EN PLACE DE LA BARRE DE RECHERCHE
-//    -50%- GESTION DES SIGNAUX + STAB DU TERM POUR LE FINDER
-//    -0%- TROUVER L'OCCURENCE OU NON + POINTEUR POINTE SUR L'OCCURENCE + CURSEUR
+//    -75%- GESTION DES SIGNAUX + STAB DU TERM POUR LE FINDER
+//    -100%- TROUVER L'OCCURENCE OU NON + POINTEUR POINTE SUR L'OCCURENCE + CURSEUR
 // ====
-// ==== [ft_select - 100% - 50% ] ====
+// ==== [ft_select - 100% - 78% ] ====
 // Notes :
-// 
+//
 // ====
 
 int					tc_out(int c)
@@ -45,7 +45,7 @@ int					tc_out(int c)
 	return (1);
 }
 
-void			tc_end(struct termios *term)
+void				tc_end(struct termios *term)
 {
 	term->c_lflag |= ICANON;
 	term->c_lflag |= ECHO;
@@ -55,7 +55,7 @@ void			tc_end(struct termios *term)
 	tputs(tgetstr("ve", NULL), 1, tc_out);
 }
 
-unsigned char					ws_init(unsigned int n)
+unsigned char		ws_init(unsigned int n)
 {
 	struct winsize	w;
 
@@ -68,7 +68,7 @@ unsigned char					ws_init(unsigned int n)
 	return (1);
 }
 
-unsigned char			tc_init(struct termios *term)
+unsigned char		tc_init(struct termios *term)
 {
 	char			buff[128];
 
