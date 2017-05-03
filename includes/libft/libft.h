@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:29:38 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/18 19:39:04 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/05/03 18:31:43 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include <unistd.h>
 # include <string.h>
 # include "get_next_line.h"
-
-// Recuperer et pointer le premier et dernier element de ma liste
 
 typedef struct			s_list
 {
