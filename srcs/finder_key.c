@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 15:13:19 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/05/03 18:01:54 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/05/03 18:11:56 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,9 @@ static void	finder(char *str)
 			return ;
 		}
 	}
-	return ;
 }
 
-static void	load_finder()
+static void	load_finder(void)
 {
 	char	*str;
 

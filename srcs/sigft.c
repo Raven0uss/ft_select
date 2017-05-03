@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 10:39:14 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/28 17:40:25 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/05/03 18:09:12 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void			sigrwft(int sig)
 	(void)sig;
 	tputs(tgetstr("cl", NULL), 1, tc_out);
 	ws_init((unsigned int)((t_data *)keepmem())->y + 1);
-        init_select();
+	init_select();
 	((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
-        cursor(1);
+	cursor(1);
 }
 
 static void			sigfgft(int sig)
@@ -54,7 +54,7 @@ static void			sigcft(int sig)
 	exit(0);
 }
 
-void				sigft()
+void				sigft(void)
 {
 	void			*sigrw;
 	void			*sigfg;

@@ -6,13 +6,14 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 10:57:31 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/05/03 17:55:38 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/05/03 18:10:16 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-// ====
+/*
+====
 // == Partie Obligatoire ==
 // ==== [100%]
 // == Partie Bonus ==
@@ -30,7 +31,7 @@
 // Notes :
 //
 // ====
-
+*/
 int					tc_out(int c)
 {
 	int				fd;

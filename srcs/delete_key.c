@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:06:28 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/04/28 17:02:56 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/05/03 18:21:17 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_list				*relinker(t_list *elem)
 	return (elem);
 }
 
-unsigned char		    evkey_delete()
+unsigned char		evkey_delete(void)
 {
 	unsigned int	flag;
 
@@ -49,18 +49,20 @@ unsigned char		    evkey_delete()
 	((t_data *)keepmem())->cur = ((t_data *)keepmem())->elem;
 	((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
 	while (((t_data *)keepmem())->elem->next)
-	  if (((t_data *)keepmem())->elem->select == 1 && ++flag)
+		if (((t_data *)keepmem())->elem->select == 1 && ++flag)
 		{
-		  if ((((t_data *)keepmem())->elem = relinker(((t_data *)keepmem())->elem)) == NULL)
+			if ((((t_data *)keepmem())->elem =\
+				relinker(((t_data *)keepmem())->elem)) == NULL)
 				return (0);
-		  ((t_data *)keepmem())->y--;
+			((t_data *)keepmem())->y--;
 		}
 		else
-		  ((t_data *)keepmem())->elem = ((t_data *)keepmem())->elem->next;
+			((t_data *)keepmem())->elem = ((t_data *)keepmem())->elem->next;
 	if (((t_data *)keepmem())->elem->select == 1 && ++flag)
-	  if ((((t_data *)keepmem())->elem = relinker(((t_data *)keepmem())->elem)) == NULL || --((t_data *)keepmem())->y == -1)
+		if ((((t_data *)keepmem())->elem = relinker(((t_data *)keepmem())->elem)) == NULL || --((t_data *)keepmem())->y == -1)
 			return (0);
-	if (!flag && ((((t_data *)keepmem())->cur = relinker(((t_data *)keepmem())->cur)) == NULL || --((t_data *)keepmem())->y == -1))
+	if (!flag && ((((t_data *)keepmem())->cur =\
+			relinker(((t_data *)keepmem())->cur)) == NULL || --((t_data *)keepmem())->y == -1))
 		return (0);
 	((t_data *)keepmem())->cy = 0;
 	init_select();

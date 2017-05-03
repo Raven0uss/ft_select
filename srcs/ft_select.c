@@ -6,20 +6,20 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 12:48:17 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/05/03 17:59:11 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/05/03 18:18:45 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-static void		ret_select()
+static void		ret_select(void)
 {
 	signed char	flag;
 
 	flag = 0;
 	((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
 	while (((t_data *)keepmem())->elem->next)
-    {
+	{
 		if (((t_data *)keepmem())->elem->select == 1)
 		{
 			if (flag > 0)
@@ -28,14 +28,14 @@ static void		ret_select()
 			flag = 1;
 		}
 		((t_data *)keepmem())->elem = ((t_data *)keepmem())->elem->next;
-    }
+	}
 	if (((t_data *)keepmem())->elem->select == 1)
-    {
+	{
 		if (flag > 0)
 			ft_putchar_fd(' ', 1);
 		ft_putstr(((t_data *)keepmem())->elem->content);
 		flag = 1;
-    }
+	}
 	if (flag)
 		ft_putchar('\n');
 }
@@ -50,7 +50,7 @@ void			aff_tc(char *buff)
 	ft_putchar('\n');
 }
 
-void			init_select()
+void			init_select(void)
 {
 	tputs(tgetstr("cl", NULL), 1, tc_out);
 	tputs(tgetstr("vi", NULL), 1, tc_out);
@@ -69,29 +69,29 @@ void			cursor(unsigned char mode)
 		{
 			tputs(tgetstr("mr", NULL), 1, tc_out);
 			ft_putstr_fd(((t_data *)keepmem())->elem->content,
-						 ((t_data *)keepmem())->fd);
+						((t_data *)keepmem())->fd);
 			tputs(tgetstr("me", NULL), 1, tc_out);
 		}
 		else
 			ft_putstr_fd(((t_data *)keepmem())->elem->content,
-						 ((t_data *)keepmem())->fd);
+						((t_data *)keepmem())->fd);
 		tputs(tgetstr("ue", NULL), 1, tc_out);
 	}
 	else if (((t_data *)keepmem())->elem->select)
 	{
 		tputs(tgetstr("mr", NULL), 1, tc_out);
 		ft_putstr_fd(((t_data *)keepmem())->elem->content,
-					 ((t_data *)keepmem())->fd);
+					((t_data *)keepmem())->fd);
 		tputs(tgetstr("me", NULL), 1, tc_out);
 	}
 	else
 		ft_putstr_fd(((t_data *)keepmem())->elem->content,
-					 ((t_data *)keepmem())->fd);
+					((t_data *)keepmem())->fd);
 	tputs(tgoto(tgetstr("cm", NULL), ((t_data *)keepmem())->cx,
 				((t_data *)keepmem())->cy), 1, tc_out);
 }
 
-void			ft_select()
+void			ft_select(void)
 {
 	char		*buff;
 
