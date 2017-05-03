@@ -6,7 +6,7 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 14:29:38 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/05/03 18:31:43 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/05/03 18:33:32 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,3 @@ char					**ft_whitespaces(char const *s);
 void					ft_freestr(char *str);
 
 #endif
-
-
