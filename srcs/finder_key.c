@@ -73,7 +73,8 @@ static void	load_finder(void)
 	((t_data *)keepmem())->term->c_lflag |= ICANON;
 	((t_data *)keepmem())->term->c_lflag |= ECHO;
 	tcsetattr(0, 0, ((t_data *)keepmem())->term);
-	read_find(((t_data *)keepmem())->fd, &str);
+	if (read_find(((t_data *)keepmem())->fd, &str) == -1)
+	  return ;
 	((t_data *)keepmem())->cy = ((t_data *)keepmem())->ky;
 	((t_data *)keepmem())->cx = ((t_data *)keepmem())->kx;
 	((t_data *)keepmem())->elem = ((t_data *)keepmem())->tmp;

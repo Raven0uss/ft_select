@@ -43,6 +43,124 @@ void			down(void)
 	cursor(1);
 }
 
+static void			move_to_col(unsigned char dir)
+{
+  int			nb;
+
+  nb = ((t_data *)keepmem())->cy;
+  if (dir == 0)
+    {
+      ((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
+      while (nb != 0 && ((t_data *)keepmem())->elem->next)
+	{
+	  nb--;
+	  ((t_data *)keepmem())->elem = ((t_data *)keepmem())->elem->next;
+	}
+    }
+  else if (dir == 1)
+    {
+      nb = (((t_data *)keepmem())->ylast - 1) - ((t_data *)keepmem())->cy - 1;
+      ((t_data *)keepmem())->elem = ptrto_last(((t_data *)keepmem())->elem);
+      while (nb >= 0 && ((t_data *)keepmem())->elem->prev)
+	{
+	  nb--;
+	  ((t_data *)keepmem())->elem = ((t_data *)keepmem())->elem->prev;
+	}
+    }
+  else if (dir == 2)
+    {
+      nb = ((t_data *)keepmem())->wy - 2;
+      while (nb >= 0 && ((t_data *)keepmem())->elem->next)
+	{
+	  nb--;
+	  ((t_data *)keepmem())->elem = ((t_data *)keepmem())->elem->next;
+	}
+    }
+  else if (dir == 3)
+    {
+      nb = (((t_data *)keepmem())->wy - 2);
+      while (nb >= 0 && ((t_data *)keepmem())->elem->prev)
+	{
+	  nb--;
+	  ((t_data *)keepmem())->elem = ((t_data *)keepmem())->elem->prev;
+	}
+    }
+}
+
+static void			left(void)
+{
+  cursor(0);
+  if (((t_data *)keepmem())->cx == 0)
+    {
+      if (((t_data *)keepmem())->cy > ((t_data *)keepmem())->ylast - 1)
+	{
+	  up();
+	  return ;
+	}
+      else if (((t_data *)keepmem())->cy == 0)
+	{
+	  ((t_data *)keepmem())->elem = ptrto_last(((t_data *)keepmem())->elem);
+	  ((t_data *)keepmem())->cy = ((t_data *)keepmem())->ylast - 1;
+	  ((t_data *)keepmem())->cx = ((t_data *)keepmem())->lencol * ((t_data *)keepmem())->nb_col;
+	  }
+      else
+	{
+	  ((t_data *)keepmem())->cx = ((t_data *)keepmem())->lencol * ((t_data *)keepmem())->nb_col;
+	  ((t_data *)keepmem())->cy--;
+	  move_to_col(1);
+	}
+    }
+  else
+    {
+      ((t_data *)keepmem())->cx -= ((t_data *)keepmem())->lencol;
+      move_to_col(3);
+    }
+  tputs(tgoto(tgetstr("cm", NULL), ((t_data *)keepmem())->cx,
+	      ((t_data *)keepmem())->cy), 1, tc_out);
+  cursor(1);
+}
+
+static void			right(void)
+{
+  cursor(0);
+  if (((t_data *)keepmem())->cx == ((t_data *)keepmem())->lencol * (((t_data *)keepmem())->nb_col - 1))
+    {
+      if (((t_data *)keepmem())->cy > ((t_data *)keepmem())->ylast - 1)
+	{
+	  down();
+	  return ;
+	}
+      else
+	{
+	  ((t_data *)keepmem())->cx += ((t_data *)keepmem())->lencol;
+	  move_to_col(2);
+	}
+    }
+  else if (((t_data *)keepmem())->cx == ((t_data *)keepmem())->lencol * ((t_data *)keepmem())->nb_col)
+    {
+      if (((t_data *)keepmem())->cy == ((t_data *)keepmem())->ylast - 1)
+	{
+	  ((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
+	  ((t_data *)keepmem())->cy = 0;
+	  ((t_data *)keepmem())->cx = 0;
+	}
+      else
+      {
+      ((t_data *)keepmem())->cx = 0;
+      ((t_data *)keepmem())->cy++;
+      move_to_col(0);
+      }
+    }
+  else
+    {
+      ((t_data *)keepmem())->cx += ((t_data *)keepmem())->lencol;
+      move_to_col(2);
+    }
+  tputs(tgoto(tgetstr("cm", NULL), ((t_data *)keepmem())->cx,
+	      ((t_data *)keepmem())->cy), 1, tc_out);
+  cursor(1);
+}
+
 void			up(void)
 {
 	cursor(0);
@@ -80,8 +198,10 @@ unsigned char	evkey_arrow(char *buff)
 	if ((signed char)buff[1] && (signed char)buff[2])
 	{
 		key = (signed char)buff[2];
-		key == 65 || key == 68 ? up() : (void)key;
-		key == 66 || key == 67 ? down() : (void)key;
+		key == 65 ? up() : (void)key;
+		key == 66 ? down() : (void)key;
+		key == 67 ? right() : (void)key;
+		key == 68 ? left() : (void)key;
 		if (key == 51 && !evkey_delete())
 			return (0);
 		else if (key == 70)

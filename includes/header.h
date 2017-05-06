@@ -29,7 +29,7 @@ typedef struct		s_data
 	t_list			*tmp;
 	t_list			*cur;
 	t_list			*elem;
-	t_list			*elem;
+	t_list			*lst;
 	unsigned int	wx;
 	unsigned int	wy;
 	unsigned int	nb_col;
