@@ -6,32 +6,12 @@
 /*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 10:57:31 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/05/03 18:10:16 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/05/31 16:08:17 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-/*
-====
-// == Partie Obligatoire ==
-// ==== [100%]
-// == Partie Bonus ==
-// ====
-// 1 [100%]- HOME/END, DEBUT/FIN DE LISTE
-// 2 [100%]- SELECTION SUPPRESSION MULTIPLE
-// 3 [100%]- NAVIGATION GAUCHE DROITE LORSQUE TERMINAL TROP PETIT
-// 4 [--0%]- INTERFACE
-// 5 [-91%]- RECHERCHE DYNAMIQUE
-//    -100%- MISE EN PLACE DE LA BARRE DE RECHERCHE
-//    --75%- GESTION DES SIGNAUX + STAB DU TERM POUR LE FINDER
-//    -100%- TROUVER L'OCCURENCE OU NON + POINTEUR POINTE SUR L'OCCURENCE + CURSEUR
-// ====
-// ==== [ft_select - 100% - -78% ] ====
-// Notes :
-//
-// ====
-*/
 int					tc_out(int c)
 {
 	int				fd;
