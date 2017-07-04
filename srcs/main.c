@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sbelazou <sbelazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/17 10:57:31 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/05/31 16:08:17 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/07/04 11:43:44 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,9 @@ unsigned char		tc_init(struct termios *term)
 	return (1);
 }
 
-int					main(int ac, char **av, char **envp)
+int					main(int ac, char **av)
 {
 	struct termios	term;
-	char			*ret;
 
 	if (ac == 1)
 		return (0);

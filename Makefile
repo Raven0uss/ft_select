@@ -6,7 +6,7 @@
 #    By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 20:16:27 by sbelazou          #+#    #+#              #
-#    Updated: 2017/04/12 12:04:17 by sbelazou         ###   ########.fr        #
+#    Updated: 2017/07/04 11:48:36 by sbelazou         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -19,7 +19,7 @@ INC_LIB		=	./includes/libft/libft.a
 SRC			=	$(shell find $(DIRSRC)*.c -type f)
 OBJ			=	$(patsubst $(DIRSRC)%,$(DIROBJ)%,$(SRC:.c=.o))
 
-FLAGS		=
+FLAGS		=	yes
 ifdef FLAGS
 	ifeq ($(FLAGS), yes)
 CFLAGS		=	-Wall -Wextra -Werror
@@ -39,7 +39,7 @@ all:			$(NAME)
 
 $(NAME):		$(OBJ)
 				-@make -C includes/libft/
-				-@$(CC) $(INC_LIB) $(CFLAGS) -o $@ $^ -lncurses
+				-@$(CC) -g $(INC_LIB) $(CFLAGS) -o $@ $^ -lncurses
 				@$(ECHO) "\033[32mAll sources are compiled. "
 				@$(ECHO) "$(NAME) has been created.\033[0m"
 

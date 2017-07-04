@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_select.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sbelazou <sbelazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 12:48:17 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/05/03 18:18:45 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/07/04 15:13:32 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,6 @@ static void		ret_select(void)
 		ft_putchar('\n');
 }
 
-void			aff_tc(char *buff)
-{
-	ft_putnbr((int)buff[0]);
-	ft_putchar(' ');
-	ft_putnbr((int)buff[1]);
-	ft_putchar(' ');
-	ft_putnbr((int)buff[2]);
-	ft_putchar('\n');
-}
-
 void			init_select(void)
 {
 	tputs(tgetstr("cl", NULL), 1, tc_out);
@@ -58,6 +48,20 @@ void			init_select(void)
 	((t_data *)keepmem())->elem = ptrto_frst(((t_data *)keepmem())->elem);
 	ft_aff_lst(((t_data *)keepmem())->elem);
 	tputs(tgetstr("ho", NULL), 1, tc_out);
+}
+
+static void		cursor_flw(void)
+{
+	if (((t_data *)keepmem())->elem->select)
+	{
+		tputs(tgetstr("mr", NULL), 1, tc_out);
+		ft_putstr_fd(((t_data *)keepmem())->elem->content,
+					((t_data *)keepmem())->fd);
+		tputs(tgetstr("me", NULL), 1, tc_out);
+	}
+	else
+		ft_putstr_fd(((t_data *)keepmem())->elem->content,
+					((t_data *)keepmem())->fd);
 }
 
 void			cursor(unsigned char mode)
@@ -77,16 +81,8 @@ void			cursor(unsigned char mode)
 						((t_data *)keepmem())->fd);
 		tputs(tgetstr("ue", NULL), 1, tc_out);
 	}
-	else if (((t_data *)keepmem())->elem->select)
-	{
-		tputs(tgetstr("mr", NULL), 1, tc_out);
-		ft_putstr_fd(((t_data *)keepmem())->elem->content,
-					((t_data *)keepmem())->fd);
-		tputs(tgetstr("me", NULL), 1, tc_out);
-	}
 	else
-		ft_putstr_fd(((t_data *)keepmem())->elem->content,
-					((t_data *)keepmem())->fd);
+		cursor_flw();
 	tputs(tgoto(tgetstr("cm", NULL), ((t_data *)keepmem())->cx,
 				((t_data *)keepmem())->cy), 1, tc_out);
 }
@@ -104,15 +100,13 @@ void			ft_select(void)
 		sigft();
 		ft_bzero((void *)buff, sizeof(buff));
 		read(0, buff, 3);
-		//aff_tc(buff);
-		if ((int)buff[0] == 27 && !evkey_arrow(buff))
+		if (((int)buff[0] == 27 && !evkey_arrow(buff))
+			|| ((int)buff[0] == 127 && !evkey_delete(0)))
 			break ;
 		if ((int)buff[0] == 32)
 			evkey_select(buff);
 		if ((int)buff[0] == 102)
-			evkey_finder(buff);
-		if ((int)buff[0] == 127 && !evkey_delete())
-			break ;
+			evkey_finder();
 		if ((int)buff[0] == 10)
 		{
 			ret_select();

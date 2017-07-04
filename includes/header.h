@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sbelazou <sbelazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 20:16:53 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/05/03 18:31:31 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/07/04 14:58:48 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,16 @@ typedef struct		s_data
 	t_list			*cur;
 	t_list			*elem;
 	t_list			*lst;
-	unsigned int	wx;
-	unsigned int	wy;
-	unsigned int	nb_col;
-	unsigned int	ylast;
-	unsigned int	lencol;
-	unsigned int	kx;
-	unsigned int	ky;
+	int				wx;
+	int				wy;
+	int				nb_col;
+	int				ylast;
+	int				lencol;
+	int				kx;
+	int				ky;
+	t_list			*prev;
+	t_list			*next;
+	t_list			*to_del;
 	struct termios	*term;
 }					t_data;
 
@@ -49,7 +52,7 @@ void				evkey_select(char *buff);
 int					tc_out(int c);
 t_list				*ptrto_frst(t_list *elem);
 t_list				*ptrto_last(t_list *elem);
-unsigned char		evkey_delete(void);
+unsigned char		evkey_delete(unsigned int flag);
 void				init_select(void);
 void				down(void);
 void				up(void);
@@ -59,6 +62,10 @@ void				tc_end(struct termios *term);
 unsigned char		tc_init(struct termios *term);
 unsigned char		ws_init(unsigned int n);
 void				fill_lencol(void);
-void				evkey_finder(char *buff);
+void				evkey_finder(void);
+void				right_continue(void);
+int					left_begin(void);
+void				home_end(signed char key);
+void				move_to_col(unsigned char dir);
 
 #endif

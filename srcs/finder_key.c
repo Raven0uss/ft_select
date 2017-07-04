@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   finder_key.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sbelazou <sbelazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 15:13:19 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/05/03 18:24:46 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/07/04 15:13:56 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-static int	read_find(const int fd, char **str)
+static int	read_find(char **str)
 {
 	char	*buff;
 	int		ret;
@@ -73,8 +73,8 @@ static void	load_finder(void)
 	((t_data *)keepmem())->term->c_lflag |= ICANON;
 	((t_data *)keepmem())->term->c_lflag |= ECHO;
 	tcsetattr(0, 0, ((t_data *)keepmem())->term);
-	if (read_find(((t_data *)keepmem())->fd, &str) == -1)
-	  return ;
+	if (read_find(&str) == -1)
+		return ;
 	((t_data *)keepmem())->cy = ((t_data *)keepmem())->ky;
 	((t_data *)keepmem())->cx = ((t_data *)keepmem())->kx;
 	((t_data *)keepmem())->elem = ((t_data *)keepmem())->tmp;
@@ -83,7 +83,7 @@ static void	load_finder(void)
 	free(str);
 }
 
-void		evkey_finder(char *buff)
+void		evkey_finder(void)
 {
 	((t_data *)keepmem())->kx = ((t_data *)keepmem())->cx;
 	((t_data *)keepmem())->ky = ((t_data *)keepmem())->cy;

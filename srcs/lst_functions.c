@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_creator.c                                      :+:      :+:    :+:   */
+/*   lst_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbelazou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sbelazou <sbelazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 11:20:35 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/05/03 18:13:16 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/07/04 14:37:43 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,23 @@
 
 t_list				*ptrto_frst(t_list *elem)
 {
-	while (elem->prev != NULL)
+	while (elem != NULL && elem->prev != NULL)
 		elem = elem->prev;
 	return (elem);
 }
 
 t_list				*ptrto_last(t_list *elem)
 {
-	while (elem->next != NULL)
+	while (elem != NULL && elem->next != NULL)
 		elem = elem->next;
 	return (elem);
 }
 
-void				fill_lencol(void)
+static t_list		*aff_continue(t_list *tmp, unsigned int padd)
 {
-	t_list			*tmp;
-
-	((t_data *)keepmem())->lencol = 0;
-	tmp = ((t_data *)keepmem())->lst;
-	tmp = ptrto_frst(tmp);
-	while (tmp->next)
-	{
-		if (((t_data *)keepmem())->lencol <
-			(unsigned int)ft_strlen(tmp->content))
-			((t_data *)keepmem())->lencol =\
-				(unsigned int)ft_strlen(tmp->content);
-		tmp = tmp->next;
-	}
-	if (tmp->content && ((t_data *)keepmem())->lencol <
-		(unsigned int)ft_strlen(tmp->content))
-		((t_data *)keepmem())->lencol = (unsigned int)ft_strlen(tmp->content);
-	((t_data *)keepmem())->lencol += 2;
-}
-
-void				ft_aff_lst(t_list *lst)
-{
-	t_list			*tmp;
-	unsigned int	padd;
-
-	tmp = lst;
-	tmp = ptrto_frst(tmp);
-	fill_lencol();
-	padd = 0;
-	((t_data *)keepmem())->cy = 1;
-	((t_data *)keepmem())->nb_col = 0;
 	while (tmp->next != NULL)
 	{
-		if ((unsigned int)((t_data *)keepmem())->cy ==
+		if ((int)((t_data *)keepmem())->cy ==
 			((t_data *)keepmem())->wy - 1)
 		{
 			((t_data *)keepmem())->cy = 0;
@@ -80,6 +50,19 @@ void				ft_aff_lst(t_list *lst)
 		((t_data *)keepmem())->cy++;
 		tmp = tmp->next;
 	}
+	return (tmp);
+}
+
+void				ft_aff_lst(t_list *lst)
+{
+	t_list			*tmp;
+
+	tmp = lst;
+	tmp = ptrto_frst(tmp);
+	fill_lencol();
+	((t_data *)keepmem())->cy = 1;
+	((t_data *)keepmem())->nb_col = 0;
+	tmp = aff_continue(tmp, 0);
 	if (tmp->content != NULL)
 	{
 		if (tmp->select)
