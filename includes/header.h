@@ -6,7 +6,7 @@
 /*   By: sbelazou <sbelazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 20:16:53 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/07/04 14:58:48 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/07/05 11:45:30 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void				evkey_select(char *buff);
 int					tc_out(int c);
 t_list				*ptrto_frst(t_list *elem);
 t_list				*ptrto_last(t_list *elem);
-unsigned char		evkey_delete(unsigned int flag);
+unsigned char		evkey_delete(void);
 void				init_select(void);
 void				down(void);
 void				up(void);
@@ -63,8 +63,6 @@ unsigned char		tc_init(struct termios *term);
 unsigned char		ws_init(unsigned int n);
 void				fill_lencol(void);
 void				evkey_finder(void);
-void				right_continue(void);
-int					left_begin(void);
 void				home_end(signed char key);
 void				move_to_col(unsigned char dir);
 

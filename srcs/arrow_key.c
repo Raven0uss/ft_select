@@ -6,7 +6,7 @@
 /*   By: sbelazou <sbelazou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/26 15:13:19 by sbelazou          #+#    #+#             */
-/*   Updated: 2017/07/04 11:38:31 by sbelazou         ###   ########.fr       */
+/*   Updated: 2017/07/05 11:44:53 by sbelazou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,48 +61,6 @@ void			move_to_col(unsigned char dir)
 	move_to_col2(dir, nb);
 }
 
-static void		left(void)
-{
-	cursor(0);
-	if (((t_data *)keepmem())->cx == 0)
-	{
-		if (left_begin() == 1)
-			return ;
-	}
-	else
-	{
-		((t_data *)keepmem())->cx -= ((t_data *)keepmem())->lencol;
-		move_to_col(3);
-	}
-	tputs(tgoto(tgetstr("cm", NULL), ((t_data *)keepmem())->cx,
-				((t_data *)keepmem())->cy), 1, tc_out);
-	cursor(1);
-}
-
-static void		right(void)
-{
-	cursor(0);
-	if (((t_data *)keepmem())->cx == ((t_data *)keepmem())->lencol *\
-		(((t_data *)keepmem())->nb_col - 1))
-	{
-		if (((t_data *)keepmem())->cy > ((t_data *)keepmem())->ylast - 1)
-		{
-			down();
-			return ;
-		}
-		else
-		{
-			((t_data *)keepmem())->cx += ((t_data *)keepmem())->lencol;
-			move_to_col(2);
-		}
-	}
-	else
-		right_continue();
-	tputs(tgoto(tgetstr("cm", NULL), ((t_data *)keepmem())->cx,\
-				((t_data *)keepmem())->cy), 1, tc_out);
-	cursor(1);
-}
-
 unsigned char	evkey_arrow(char *buff)
 {
 	signed char	key;
@@ -112,8 +70,8 @@ unsigned char	evkey_arrow(char *buff)
 		key = (signed char)buff[2];
 		key == 65 ? up() : (void)key;
 		key == 66 ? down() : (void)key;
-		key == 67 ? right() : (void)key;
-		key == 68 ? left() : (void)key;
+		key == 67 ? down() : (void)key;
+		key == 68 ? up() : (void)key;
 		if (key == 51 && !evkey_delete(0))
 			return (0);
 		else
